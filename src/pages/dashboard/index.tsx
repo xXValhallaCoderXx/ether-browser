@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class TxBrowserContainer extends Component {
+export default class DashboardPageContainer extends Component {
   render() {
     return (
       <div>
-        Hello World
+        DASHBOARD
       </div>
     )
   }
