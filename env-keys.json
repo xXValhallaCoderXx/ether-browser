@@ -1,0 +1,10 @@
+{
+  "production": {
+    "ENV_VAR": "PROD",
+    "TEST": "PROD2"
+  },
+  "development": {
+    "ENV_VAR": "DEV",
+    "TEST": "DEV2"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+      "target": "es2016", // Specify what our Target language will be for TS Compiler
+      "module": "esnext", // Specify module code: variout options like 'none', commonjs', 'es2015', or 'ESNext' etc <-- Here we compile to ES2015 and babel takes over
+      "allowJs": true, // Allows for the JS files to be compiled
+      "jsx": "preserve", // We could define react here, but we tell TS to not transform it as we got babel to do the work
+      "strict": true, // Stricter type checking
+      "allowSyntheticDefaultImports": true, // Allows you to use ES2015 style imports, even though the code we import doesnt have a ES2015 default export
+      "moduleResolution": "node", /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+      "baseUrl": "src", // Allow us to import relative to this folder
+      "strictNullChecks": true
+  },
+  "exclude": [
+      "node_modules" // Dont touch the node modules
+  ]
+}
+
+
+// We need esnext as we will use dynamic imports in our app
