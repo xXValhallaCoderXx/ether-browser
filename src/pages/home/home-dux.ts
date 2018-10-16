@@ -1,48 +1,26 @@
-export interface InitialStateHome {
+export interface IHomeState {
   readonly walletURL: string | null;
 }
 
-export type HomeActions =
-  | { type: "@@HOME/WALLET_FETCHING"; }
-  | { type: "@@HOME/WALLET_SUCCESS"; payload: any }
-  | { type: "@@HOME/WALLET_FAILED"; payload: any };
-
-export const fetchWalletData = () => {
-  return (dispatch: any) => {
-    dispatch({
-      type: "@@HOME/WALLET_FETCHING"
-    })
-    return fetch(`https://jsonplaceholder.typicode.com/todos/1`)
-      .then(
-        response => response.json(),
-        error => {
-          dispatch({
-            type: "@@HOME/WALLET_FAILED",
-            payload: "ERROR"
-          })
-        }
-      )
-      .then(json => {
-        dispatch({
-          type: "@@HOME/WALLET_SUCCESS",
-          payload: json
-        })
-      })
-  };
-};
+export type Actions =
+  | { type: "@@HOME/ETHEREUM_CONTRACT"; payload: string };
 
 
-const initialState: InitialStateHome = {
+export const setEtheremContract = (contractID: string): Actions => {
+  return {type: "@@HOME/ETHEREUM_CONTRACT", payload: contractID}
+}
+
+const initialState: IHomeState = {
   walletURL: null
 };
 
 export default (
   state = initialState,
-  action: HomeActions
-): InitialStateHome => {
+  action: Actions
+): IHomeState => {
   switch (action.type) {
-    case "@@HOME/WALLET_FETCHING":
-      return { ...state };
+    case "@@HOME/ETHEREUM_CONTRACT":
+      return { ...state, walletURL: action.payload };
     default:
       return state;
   }

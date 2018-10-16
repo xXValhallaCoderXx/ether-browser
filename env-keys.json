@@ -1,10 +1,8 @@
 {
   "production": {
-    "ENV_VAR": "PROD",
-    "TEST": "PROD2"
+    "ETHER_SCAN": "85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS"
   },
   "development": {
-    "ENV_VAR": "DEV",
-    "TEST": "DEV2"
+    "ETHER_SCAN": "85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS"
   }
 }

@@ -5,7 +5,7 @@ const path = require("path");
 const parts = require("./webpack.parts");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const config = require("../env-keys.json");
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 commonConfig = app =>
   merge([
     {
@@ -13,6 +13,7 @@ commonConfig = app =>
         app: PATHS.app
       },
       plugins: [
+        //new BundleAnalyzerPlugin(),
         new HtmlWebpackPlugin({
           title: "Webpack demo",
           template: path.resolve(__dirname, "../src/index.html")

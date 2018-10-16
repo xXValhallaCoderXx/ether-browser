@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import homeReducer, {InitialStateHome} from "pages/home/home-dux";
+import homeReducer, {IHomeState} from "pages/home/home-dux";
 
 export interface IAppState {
-  home: InitialStateHome
+  home: IHomeState
 }
 
 export default combineReducers<IAppState>({

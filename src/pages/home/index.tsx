@@ -1,19 +1,40 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import {IAppState} from "store/rootReducer";
-import {fetchWalletData} from "./home-dux";
+import { IAppState } from "store/rootReducer";
+import { Container, Col, Card, CardBody } from "reactstrap";
+import { NavBar } from "shared/components";
+
+import Form from "./form";
+const styles = require("./styles.module.scss");
 
 interface IProps {
   fetchData: () => void;
 }
 
 class HomePageContainer extends Component<IProps> {
-  componentDidMount(){
-    this.props.fetchData();
-  }
   render() {
-    return <div>Hello Ethereum</div>;
+    return (
+      <Container fluid style={{ padding: 0, height: "100%" }}>
+        <NavBar />
+        <Container fluid className={styles.contentWrapper}>
+          <Col
+            xs={{ size: 12 }}
+            sm={{ size: 8, offset: 2 }}
+            md={{ size: 8, offset: 2 }}
+            lg={{ size: 6, offset: 3 }}
+          >
+            <Card className={styles.cardWrapper}>
+              <CardBody>
+                <h3 style={{ marginBottom: 20, textAlign: "center" }}>
+                  Ethereum TX Browser
+                </h3>
+                <Form />
+              </CardBody>
+            </Card>
+          </Col>
+        </Container>
+      </Container>
+    );
   }
 }
 
@@ -21,13 +42,4 @@ const mapStateToProps = (state: IAppState) => {
   return { home: state.home };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return bindActionCreators(
-    {
-      fetchData: fetchWalletData
-    },
-    dispatch
-  );
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePageContainer);
+export default connect(mapStateToProps)(HomePageContainer);
