@@ -1,52 +1,26 @@
-export interface InitialStateHome {
-  readonly walletURL: string | null;
+import {HomeActions} from "pages/home/home-dux";
+
+export interface IDashboardState {
+  readonly contractData: {};
+  readonly selectedContract: string | null;
 }
 
-export type HomeActions =
-  | { type: "@@HOME/WALLET_FETCHING"; }
-  | { type: "@@HOME/WALLET_SUCCESS"; payload: any }
-  | { type: "@@HOME/WALLET_FAILED"; payload: any };
+// export const setEtheremContract = (contractID: string): Actions => {
+//   return { type: "@@HOME/ETHEREUM_CONTRACT", payload: contractID };
+// };
 
-export const fetchWalletData = () => {
-  return (dispatch: any) => {
-    dispatch({
-      type: "@@HOME/WALLET_FETCHING"
-    })
-    return fetch(`http://api.etherscan.io/api?module=account&action=txlist&address=0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae&startblock=0&endblock=99999999&sort=asc&apikey=85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS`)
-      .then(
-        response => response.json(),
-        error => {
-          dispatch({
-            type: "@@HOME/WALLET_FAILED",
-            payload: "ERROR"
-          })
-        }
-      )
-      .then(json => {
-        dispatch({
-          type: "@@HOME/WALLET_SUCCESS",
-          payload: json
-        })
-      })
-  };
+
+const initialState: IDashboardState = {
+  contractData: {},
+  selectedContract: null
 };
 
-
-const initialState: InitialStateHome = {
-  walletURL: null
-};
-
-export default (
-  state = initialState,
-  action: HomeActions
-): InitialStateHome => {
+export default (state = initialState, action: HomeActions): IDashboardState => {
   switch (action.type) {
-    case "@@HOME/WALLET_FETCHING":
-      return { ...state };
+    case "@@HOME/CONTRACT_DATA_SUCCESS":
+      const selectedContract = Object.keys(action.payload);
+      return { ...state, contractData: action.payload, selectedContract: selectedContract[0] };
     default:
       return state;
   }
 };
-
-
-

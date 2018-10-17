@@ -1,18 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { IAppState } from "store/rootReducer";
+import { IRootState } from "store/rootReducer";
 import { Container, Col, Card, CardBody } from "reactstrap";
 import { NavBar } from "shared/components";
+import { fetchContractData } from "./home-dux";
 
 import Form from "./form";
 const styles = require("./styles.module.scss");
 
-interface IProps {
-  fetchData: () => void;
+interface IDispatchProps {
+  fetchContractData: (data: string) => void;
+  home: {
+    loading: boolean;
+    success: boolean;
+    error: boolean;
+    msg: string;
+  }
 }
 
-class HomePageContainer extends Component<IProps> {
+class HomePageContainer extends Component<IDispatchProps> {
   render() {
+    const { fetchContractData } = this.props;
     return (
       <Container fluid style={{ padding: 0, height: "100%" }}>
         <NavBar />
@@ -28,7 +36,7 @@ class HomePageContainer extends Component<IProps> {
                 <h3 style={{ marginBottom: 20, textAlign: "center" }}>
                   Ethereum TX Browser
                 </h3>
-                <Form fetchData={this.props.fetchData}/>
+                <Form status={this.props.home} fetchContractData={fetchContractData} />
               </CardBody>
             </Card>
           </Col>
@@ -38,21 +46,13 @@ class HomePageContainer extends Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: IAppState) => {
+const mapStateToProps = (state: IRootState) => {
   return { home: state.home };
 };
 
-// const mapDispatchToProps = (dispatch: ThunkDispatch<IAppState, {}, Actions>) => {
-//   return bindActionCreators(
-//     {
-//       fetchData: fetchContractData
-//     },
-//     dispatch
-//   );
-// }
-
-// const mapDispatchToProps = (dispatch: ThunkDispatch<IAppState, {}, Actions>) => ({
-//   fetchData: () => dispatch(fetchContractData("")),
-// });
-
-export default connect(mapStateToProps, null)(HomePageContainer);
+export default connect(
+  mapStateToProps,
+  {
+    fetchContractData
+  }
+)(HomePageContainer);

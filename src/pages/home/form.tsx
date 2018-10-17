@@ -1,31 +1,41 @@
 import React, { Component } from "react";
-import { Button, Input, FormGroup, Label, FormText, Form, FormFeedback } from "reactstrap";
-import { validateForm } from "./utils";
-
+import {
+  Button,
+  Input,
+  FormGroup,
+  Label,
+  FormText,
+  Form,
+  FormFeedback,
+  Col
+} from "reactstrap";
+const styles = require("./styles.module.scss");
 
 interface IProps {
-  fetchData: (data: string) => void;
+  fetchContractData: (data: string) => void;
+  status: {
+    loading: boolean;
+    success: boolean;
+    error: boolean;
+    msg: string;
+  };
 }
 interface IState {
   value: string;
 }
 
 export default class HomeForm extends Component<IProps, IState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      value: ""
-    };
-    this._handleOnChange = this._handleOnChange.bind(this);
-  }
+  state = {
+    value: ""
+  };
   render() {
+    const { loading, error, msg } = this.props.status;
     return (
       <Form onSubmit={this._handleSubmit}>
         <FormGroup>
           <Label for="contractID">Contract ID</Label>
           <Input
-            // valid={false}
-            // invalid={true}
+            invalid={error}
             type="text"
             value={this.state.value}
             onChange={this._handleOnChange}
@@ -33,25 +43,26 @@ export default class HomeForm extends Component<IProps, IState> {
           <FormText color="muted">
             Please enter the Ethereum contract you wish to view
           </FormText>
-          <FormFeedback>Oh noes! that name is already taken</FormFeedback>
-          <Button block style={{ marginTop: 10, marginBottom: -10 }}>
-            ENTER
-          </Button>
+          <FormFeedback>{msg}</FormFeedback>
+          {loading ? (
+            <Col className={styles.loadingWrapper}>
+              <div className={styles.loading}>Loading</div>
+            </Col>
+          ) : (
+            <Button className={styles.btnStyles} type="submit" block>
+              ENTER
+            </Button>
+          )}
         </FormGroup>
       </Form>
     );
   }
 
-  private _handleOnChange = (e: React.FormEvent<HTMLInputElement>) =>
+  private _handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     this.setState({ value: e.currentTarget.value });
 
   private _handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      let result = await validateForm(this.state.value);
-      this.props.fetchData(this.state.value);
-    } catch (e) {
-      console.log("ERROR: ", e);
-    }
+    this.props.fetchContractData(this.state.value);
   };
 }

@@ -1,49 +1,87 @@
-// import { Dispatch, AnyAction } from "redux";
-// import { ThunkAction, ThunkDispatch } from "redux-thunk";
-// import { IAppState } from "store/rootReducer";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { IRootState } from "store/rootReducer";
+import { validateForm, parseResult } from "./utils";
+
+import history from 'shared/history';
 
 export interface IHomeState {
-  readonly walletURL: string | null;
+  readonly loading: boolean;
+  readonly error: boolean;
+  readonly success: boolean;
+  readonly msg: string;
 }
 
-export type Actions =
-  | { type: "@@HOME/ETHEREUM_CONTRACT"; payload: string }
+export type HomeActions =
   | { type: "@@HOME/CONTRACT_DATA_FETCHING" }
   | { type: "@@HOME/CONTRACT_DATA_SUCCESS"; payload: object }
-  | { type: "@@HOME/CONTRACT_DATA_FAILED" };
+  | { type: "@@HOME/CONTRACT_DATA_FAILED"; payload: string };
 
-// type SideEffect<T> = ThunkAction<Promise<T>, IAppState, {}, Actions>;
+type ThunkType = ThunkAction<Promise<any>, IRootState, null, any>;
+type ThunkDisp = ThunkDispatch<IRootState, void, HomeActions>;
 
-// type ThunkResult<R> = ThunkAction<R, IAppState, {}, Actions>;
+export const fetchContractData = (contractID: string): ThunkType => {
+  return async (dispatch: ThunkDisp) => {
+    // Handle Form Validation
+    try {
+      await validateForm(contractID);
+    } catch (e) {
+      return dispatch({
+        type: "@@HOME/CONTRACT_DATA_FAILED",
+        payload: e.data
+      });
+    }
 
-export const setEtheremContract = (contractID: string): Actions => {
-  return { type: "@@HOME/ETHEREUM_CONTRACT", payload: contractID };
+    dispatch({ type: "@@HOME/CONTRACT_DATA_FETCHING" });
+    try {
+      const result = await fetch(
+        `http://api.etherscan.io/api?module=account&action=txlist&address=${contractID}&startblock=0&endblock=99999999&sort=asc&apikey=85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS`
+      );
+      const data = await result.json();
+      if (data.status === "0") {
+        // Invalid ID entered - Response status will be 0
+        dispatch({ type: "@@HOME/CONTRACT_DATA_FAILED", payload: data.result });
+      } else {
+        // Parse result to store by ID
+        const result = await parseResult(contractID, data.result);
+        dispatch({ type: "@@HOME/CONTRACT_DATA_SUCCESS", payload: result });
+        history.push("/dashboard")
+      }
+    } catch (e) {
+      dispatch({
+        type: "@@HOME/CONTRACT_DATA_FAILED",
+        payload: "A server error has occured"
+      });
+    }
+  };
 };
-
-// export const fetchContractData = (data: string): ThunkResult<any> => {
-//   return async (dispatch: ThunkDispatch<IAppState, void, Actions>) => {
-//     dispatch({ type: "@@HOME/CONTRACT_DATA_FETCHING" });
-//     try {
-//       const result = await fetch(
-//         `http://api.etherscan.io/api?module=account&action=txlist&address=0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae&startblock=0&endblock=99999999&sort=asc&apikey=85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS`
-//       );
-//       console.log("WHAT RESULT: ", result);
-//       const data = await result.json();
-//       dispatch({ type: "@@HOME/CONTRACT_DATA_SUCCESS", payload: data });
-//     } catch (e) {
-//       dispatch({ type: "@@HOME/CONTRACT_DATA_FAILED" });
-//     }
-//   };
-// };
 
 const initialState: IHomeState = {
-  walletURL: null
+  loading: false,
+  error: false,
+  success: false,
+  msg: ""
 };
 
-export default (state = initialState, action: Actions): IHomeState => {
+export default (state = initialState, action: HomeActions): IHomeState => {
   switch (action.type) {
-    case "@@HOME/ETHEREUM_CONTRACT":
-      return { ...state, walletURL: action.payload };
+    case "@@HOME/CONTRACT_DATA_FETCHING":
+      return { ...state, loading: true, success: false, error: false, msg: "" };
+    case "@@HOME/CONTRACT_DATA_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        error: false,
+        msg: "Success!"
+      };
+    case "@@HOME/CONTRACT_DATA_FAILED":
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: true,
+        msg: action.payload
+      };
     default:
       return state;
   }
