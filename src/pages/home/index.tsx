@@ -28,7 +28,7 @@ class HomePageContainer extends Component<IProps> {
                 <h3 style={{ marginBottom: 20, textAlign: "center" }}>
                   Ethereum TX Browser
                 </h3>
-                <Form />
+                <Form fetchData={this.props.fetchData}/>
               </CardBody>
             </Card>
           </Col>
@@ -42,4 +42,17 @@ const mapStateToProps = (state: IAppState) => {
   return { home: state.home };
 };
 
-export default connect(mapStateToProps)(HomePageContainer);
+// const mapDispatchToProps = (dispatch: ThunkDispatch<IAppState, {}, Actions>) => {
+//   return bindActionCreators(
+//     {
+//       fetchData: fetchContractData
+//     },
+//     dispatch
+//   );
+// }
+
+// const mapDispatchToProps = (dispatch: ThunkDispatch<IAppState, {}, Actions>) => ({
+//   fetchData: () => dispatch(fetchContractData("")),
+// });
+
+export default connect(mapStateToProps, null)(HomePageContainer);

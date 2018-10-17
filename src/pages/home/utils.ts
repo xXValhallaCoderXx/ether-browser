@@ -1,5 +1,8 @@
-export const validateForm = () => {
+export const validateForm = (value: string) => {
   return new Promise((resolve, reject) => {
-    return resolve("Hello World")
+    if(value === ""){
+      reject({success: false, data: "You must enter a value!"})
+    }
+    resolve({success: true})
   })
 }

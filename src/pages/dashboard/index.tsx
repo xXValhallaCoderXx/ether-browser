@@ -12,12 +12,3 @@ export default class DashboardPageContainer extends Component {
     );
   }
 }
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return bindActionCreators(
-//     {
-//       fetchData: fetchWalletData
-//     },
-//     dispatch
-//   );
-// }
