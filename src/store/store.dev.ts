@@ -1,11 +1,12 @@
 import { createStore, compose, applyMiddleware, Store } from "redux";
-import { IAppState } from "./rootReducer";
+import ReduxThunk from 'redux-thunk';
+import { IRootState } from "./rootReducer";
 import rootReducer from "./rootReducer";
 import { logger } from "redux-logger";
 
 export default function configureStore(
-  initialState: IAppState
-): Store<IAppState> {
-  const store = createStore(rootReducer, compose(applyMiddleware(logger)));
+  initialState: IRootState
+): Store<IRootState> {
+  const store = createStore(rootReducer, compose(applyMiddleware(logger, ReduxThunk)));
   return store;
 }

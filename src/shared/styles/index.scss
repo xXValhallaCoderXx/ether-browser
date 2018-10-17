@@ -1,5 +1,13 @@
+html, 
 body {
-  display: flex;
-  background-repeat: no-repeat;
-  background-position: center;
+    height: 100%;
+    width: 100%;
 }
+
+#render-app {
+    height: 100%;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+@import "vendors/bootstrap/bootstrap.scss";

@@ -18,6 +18,7 @@ exports.devServer = ({ host, port } = {}) => ({
   // Handles the WDS for Development
   devServer: {
     stats: "errors-only",
+    historyApiFallback: true,
     hotOnly: true,
     host, // Defaults to `localhost`
     port, // Defaults to 8080
