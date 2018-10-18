@@ -7,6 +7,7 @@ import ContractInfo from "./components/contract-info";
 import { NavBar, LoadingView, Sidebar } from "shared/components";
 import DataTable from "./components/data-table";
 import { fetchEtherBalance, fetchEtherRates } from "./init-data-dux";
+import { setCurrency } from "./dashboard-dux";
 const styles = require("./styles.module.scss");
 
 interface IDispatchProps {
@@ -14,7 +15,8 @@ interface IDispatchProps {
   overViewData: any;
   fetchEtherBalance: (data: string) => void;
   fetchEtherRates: () => void;
- }
+  setCurrency: (currency: string) => void;
+}
 
 class DashboardContainer extends Component<IDispatchProps> {
   async componentDidMount() {
@@ -24,14 +26,21 @@ class DashboardContainer extends Component<IDispatchProps> {
     await this.props.fetchEtherRates();
   }
   render() {
-    const { selectedContract, contractData, status, etherBalance } = this.props.dashboard;
+    const {
+      selectedContract,
+      contractData,
+      status,
+      etherBalance
+    } = this.props.dashboard;
     if (status.loading) {
       return <LoadingView />;
     }
     console.log("props: ", this.props);
     return (
       <Container fluid>
-        <NavBar />
+        <NavBar
+          handleChangeCurrency={(x: string) => this.props.setCurrency(x)}
+        />
         <Container className={styles.appLayoutWrapper}>
           <Container>
             <Col style={{ marginTop: 50, marginBottom: 50 }}>
@@ -42,9 +51,8 @@ class DashboardContainer extends Component<IDispatchProps> {
               <DataTable data={contractData[selectedContract]} />
             </Col>
           </Container>
-          <Sidebar isOpen={false}/>
+          <Sidebar isOpen={false} />
         </Container>
-        
       </Container>
     );
   }
@@ -52,12 +60,12 @@ class DashboardContainer extends Component<IDispatchProps> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    dashboard: state.dashboard,
+    dashboard: state.initDashboard,
     overViewData: overViewData(state)
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchEtherBalance, fetchEtherRates }
+  { fetchEtherBalance, fetchEtherRates, setCurrency }
 )(DashboardContainer);

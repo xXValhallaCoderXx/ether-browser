@@ -4,7 +4,7 @@ import { IRootState } from "store/rootReducer";
 
 // This Redux Dux file will handle Initial Data Loading For Application
 
-export interface IDashboardState {
+export interface InitDashbardState {
   readonly contractData: {};
   readonly selectedContract: string | null;
   readonly etherBalance: string;
@@ -90,7 +90,7 @@ export const fetchEtherRates = (): ThunkType => {
   };
 };
 
-const initialState: IDashboardState = {
+const initialState: InitDashbardState = {
   contractData: {},
   selectedContract: null,
   etherBalance: "",
@@ -114,7 +114,7 @@ const initialState: IDashboardState = {
 export default (
   state = initialState,
   action: HomeActions & DashboardActions
-): IDashboardState => {
+): InitDashbardState => {
   switch (action.type) {
     case "@@HOME/CONTRACT_DATA_SUCCESS":
       const selectedContract = Object.keys(action.payload);

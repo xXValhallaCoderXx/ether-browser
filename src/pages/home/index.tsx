@@ -23,7 +23,7 @@ class HomePageContainer extends Component<IDispatchProps> {
     const { fetchContractData } = this.props;
     return (
       <Container fluid style={{ padding: 0, height: "100%" }}>
-        <NavBar />
+        <NavBar handleChangeCurrency={() => null}/>
         <Container fluid className={styles.contentWrapper}>
           <Col
             xs={{ size: 12 }}

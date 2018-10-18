@@ -16,11 +16,17 @@ import { Route, Switch } from "react-router-dom";
 
 interface IState {
   isOpen: boolean;
+  selectedItem: string;
 }
 
-export default class index extends Component<{}, IState> {
+interface IProps {
+  handleChangeCurrency: (currency: string) => void;
+}
+
+export default class index extends Component<IProps, IState> {
   state = {
-    isOpen: false
+    isOpen: false,
+    selectedItem: "USD"
   };
   render() {
     return (
@@ -40,15 +46,16 @@ export default class index extends Component<{}, IState> {
                 <Fragment>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
-                      Select Currency
+                      {this.state.selectedItem}
                     </DropdownToggle>
                     <DropdownMenu right>
-                      <DropdownItem>USD</DropdownItem>
-                      <DropdownItem>SGD</DropdownItem>
-                      <DropdownItem>YEN</DropdownItem>
-                      <DropdownItem>WON</DropdownItem>
-                      <DropdownItem>GBP</DropdownItem>
-                      <DropdownItem>YUAN</DropdownItem>
+                      <DropdownItem value="USD" onClick={this._setValue}>USD</DropdownItem>
+                      <DropdownItem value="JPY" onClick={this._setValue}>JPY</DropdownItem>
+                      <DropdownItem value="EUR" onClick={this._setValue}>EUR</DropdownItem>
+                      <DropdownItem value="SGD" onClick={this._setValue}>SGD</DropdownItem>
+                      <DropdownItem value="CNY" onClick={this._setValue}>CNY</DropdownItem>
+                      <DropdownItem value="KRW" onClick={this._setValue}>KRW</DropdownItem>
+                      <DropdownItem value="GBP" onClick={this._setValue}>GBP</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </Fragment>
@@ -59,5 +66,9 @@ export default class index extends Component<{}, IState> {
       </Navbar>
     );
   }
+  _setValue = (e: any) => {
+    this.props.handleChangeCurrency(e.target.value);
+    this.setState({ selectedItem: e.target.value})
+  };
   _toggle = () => this.setState({ isOpen: !this.state.isOpen });
 }
