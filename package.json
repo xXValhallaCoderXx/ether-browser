@@ -63,6 +63,7 @@
     "reactstrap": "^6.5.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "web3": "^1.0.0-beta.36"
   }
 }

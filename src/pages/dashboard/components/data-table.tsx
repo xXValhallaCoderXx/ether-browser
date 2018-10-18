@@ -16,7 +16,6 @@ export default class DataTable extends Component<IProps, IState> {
     selected: null
   }
   render() {
-    console.log("STATE: ", this.state);
     const {data} = this.props;
     return (
       <ReactTable
@@ -52,7 +51,6 @@ export default class DataTable extends Component<IProps, IState> {
           if (rowInfo && rowInfo.row) {
             return {
               onClick: (e: any) => {
-                console.log("ROW INFO: ", rowInfo)
                 this.setState({
                   selected: rowInfo.index
                 })
