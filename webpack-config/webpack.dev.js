@@ -14,8 +14,8 @@ developmentConfig = app =>
       port: process.env.PORT
     }),
     parts.developmentCSS({
-      include: PATHS.app,
-      exclude: PATHS.nodeModules
+      include: [PATHS.app, PATHS.reactTableCSS],
+      //exclude: PATHS.nodeModules
     }),
     parts.loadImages()
   ]);

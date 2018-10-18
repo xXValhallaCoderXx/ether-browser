@@ -38,20 +38,17 @@ export default class index extends Component<{}, IState> {
               {/* If user is on Dashboard page - Display other Navlinks */}
               <Route exact path="/dashboard">
                 <Fragment>
-                  <NavItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">
-                      GitHub
-                    </NavLink>
-                  </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
-                      Options
+                      Select Currency
                     </DropdownToggle>
                     <DropdownMenu right>
-                      <DropdownItem>Option 1</DropdownItem>
-                      <DropdownItem>Option 2</DropdownItem>
-                      <DropdownItem divider />
-                      <DropdownItem>Reset</DropdownItem>
+                      <DropdownItem>USD</DropdownItem>
+                      <DropdownItem>SGD</DropdownItem>
+                      <DropdownItem>YEN</DropdownItem>
+                      <DropdownItem>WON</DropdownItem>
+                      <DropdownItem>GBP</DropdownItem>
+                      <DropdownItem>YUAN</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </Fragment>
