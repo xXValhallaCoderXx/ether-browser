@@ -194,7 +194,7 @@ exports.extractCSS = ({ include, exclude }) => {
     module: {
       rules: [
         {
-          test: /^((?!\.module).)*scss$/,
+          test: [/^((?!\.module).)*scss$/, /^((?!\.module).)*css$/],
           include,
           exclude,
           use: [

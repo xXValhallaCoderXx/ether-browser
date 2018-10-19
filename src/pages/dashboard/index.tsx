@@ -47,7 +47,7 @@ class DashboardContainer extends Component<IDispatchProps> {
               <ContractInfo overViewData={this.props.overViewData} />
             </Col>
 
-            <Col lg={{ size: 10, offset: 1 }}>
+            <Col lg={{ size: 11}}>
               <DataTable data={contractData[selectedContract]} />
             </Col>
           </Container>

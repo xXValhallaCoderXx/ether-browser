@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import moment from "moment";
+import {convertUnix} from "shared/utils";
 
 interface IProps {
   data: any;
@@ -40,10 +40,23 @@ export default class DataTable extends Component<IProps, IState> {
             id: "timeStamp",
             Header: "Date",
             accessor: (d: any) => {
-              return moment.unix(d.timeStamp).format("MM/DD/YYYY HH:mm:ss");
+              return convertUnix(d.timeStamp);
             },
             width: 200
-          }
+          },
+          // {
+          //   id: "value",
+          //   Header: "Value",
+          //   accessor: (d: any) => {
+          //     const gasUsed = web3.utils.fromWei(d.gasUsed, 'ether')
+          //     const gasPrice = web3.utils.fromWei(d.gasPrice, 'ether')
+              
+       
+          //     console.log("CHECKING: ", gasPrice);
+          //     return moment.unix(d.timeStamp).format("MM/DD/YYYY HH:mm:ss");
+          //   },
+          //   width: 200
+          // }
         ]}
         defaultPageSize={10}
         className="-striped -highlight"
