@@ -34,8 +34,8 @@ productionConfig = app =>
       recordsPath: path.join(__dirname, "../dist/records.json")
     },
     parts.extractCSS({
-      include: PATHS.app,
-      exclude: PATHS.nodeModules
+      include: [PATHS.app, PATHS.reactTableCSS],
+      //exclude: PATHS.nodeModules
     }),
     parts.loadImages({
       options: {

@@ -1,25 +1,35 @@
-import {HomeActions} from "pages/home/home-dux";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { IRootState } from "store/rootReducer";
+
+// This Redux Dux file will handle Initial Data Loading For Application
 
 export interface IDashboardState {
-  readonly contractData: {};
-  readonly selectedContract: string | null;
+  readonly selectedCurrency: string;
 }
 
-// export const setEtheremContract = (contractID: string): Actions => {
-//   return { type: "@@HOME/ETHEREUM_CONTRACT", payload: contractID };
-// };
-
-
-const initialState: IDashboardState = {
-  contractData: {},
-  selectedContract: null
+export type DashboardActions = {
+  type: "@@DASHBOARD/SELECT_CURRENCY";
+  payload: any;
 };
 
-export default (state = initialState, action: HomeActions): IDashboardState => {
+type ThunkType = ThunkAction<Promise<any>, IRootState, null, any>;
+type ThunkDisp = ThunkDispatch<IRootState, void, DashboardActions>;
+
+export const setCurrency = (currency: string): DashboardActions => {
+  return { type: "@@DASHBOARD/SELECT_CURRENCY", payload: currency };
+};
+
+const initialState: IDashboardState = {
+  selectedCurrency: "USD"
+};
+
+export default (
+  state = initialState,
+  action: DashboardActions
+): IDashboardState => {
   switch (action.type) {
-    case "@@HOME/CONTRACT_DATA_SUCCESS":
-      const selectedContract = Object.keys(action.payload);
-      return { ...state, contractData: action.payload, selectedContract: selectedContract[0] };
+    case "@@DASHBOARD/SELECT_CURRENCY":
+      return {...state, selectedCurrency: action.payload}
     default:
       return state;
   }

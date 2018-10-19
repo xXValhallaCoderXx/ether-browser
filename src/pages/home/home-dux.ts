@@ -12,9 +12,9 @@ export interface IHomeState {
 }
 
 export type HomeActions =
-  | { type: "@@HOME/CONTRACT_DATA_FETCHING" }
-  | { type: "@@HOME/CONTRACT_DATA_SUCCESS"; payload: object }
-  | { type: "@@HOME/CONTRACT_DATA_FAILED"; payload: string };
+  | { type: "@@HOME/CONTRACT_DATA_FETCHING", payload: string }
+  | { type: "@@HOME/CONTRACT_DATA_SUCCESS", payload: object }
+  | { type: "@@HOME/CONTRACT_DATA_FAILED", payload: string };
 
 type ThunkType = ThunkAction<Promise<any>, IRootState, null, any>;
 type ThunkDisp = ThunkDispatch<IRootState, void, HomeActions>;
@@ -31,7 +31,7 @@ export const fetchContractData = (contractID: string): ThunkType => {
       });
     }
 
-    dispatch({ type: "@@HOME/CONTRACT_DATA_FETCHING" });
+    dispatch({ type: "@@HOME/CONTRACT_DATA_FETCHING", payload: "" });
     try {
       const result = await fetch(
         `http://api.etherscan.io/api?module=account&action=txlist&address=${contractID}&startblock=0&endblock=99999999&sort=asc&apikey=85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS`

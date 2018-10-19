@@ -16,11 +16,17 @@ import { Route, Switch } from "react-router-dom";
 
 interface IState {
   isOpen: boolean;
+  selectedItem: string;
 }
 
-export default class index extends Component<{}, IState> {
+interface IProps {
+  handleChangeCurrency: (currency: string) => void;
+}
+
+export default class index extends Component<IProps, IState> {
   state = {
-    isOpen: false
+    isOpen: false,
+    selectedItem: "USD"
   };
   render() {
     return (
@@ -38,20 +44,18 @@ export default class index extends Component<{}, IState> {
               {/* If user is on Dashboard page - Display other Navlinks */}
               <Route exact path="/dashboard">
                 <Fragment>
-                  <NavItem>
-                    <NavLink href="https://github.com/reactstrap/reactstrap">
-                      GitHub
-                    </NavLink>
-                  </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
-                      Options
+                      {this.state.selectedItem}
                     </DropdownToggle>
                     <DropdownMenu right>
-                      <DropdownItem>Option 1</DropdownItem>
-                      <DropdownItem>Option 2</DropdownItem>
-                      <DropdownItem divider />
-                      <DropdownItem>Reset</DropdownItem>
+                      <DropdownItem value="USD" onClick={this._setValue}>USD</DropdownItem>
+                      <DropdownItem value="JPY" onClick={this._setValue}>JPY</DropdownItem>
+                      <DropdownItem value="EUR" onClick={this._setValue}>EUR</DropdownItem>
+                      <DropdownItem value="SGD" onClick={this._setValue}>SGD</DropdownItem>
+                      <DropdownItem value="CNY" onClick={this._setValue}>CNY</DropdownItem>
+                      <DropdownItem value="KRW" onClick={this._setValue}>KRW</DropdownItem>
+                      <DropdownItem value="GBP" onClick={this._setValue}>GBP</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </Fragment>
@@ -62,5 +66,9 @@ export default class index extends Component<{}, IState> {
       </Navbar>
     );
   }
+  _setValue = (e: any) => {
+    this.props.handleChangeCurrency(e.target.value);
+    this.setState({ selectedItem: e.target.value})
+  };
   _toggle = () => this.setState({ isOpen: !this.state.isOpen });
 }
