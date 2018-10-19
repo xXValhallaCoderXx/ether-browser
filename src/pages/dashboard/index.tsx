@@ -7,7 +7,7 @@ import ContractInfo from "./components/contract-info";
 import { NavBar, LoadingView, Sidebar } from "shared/components";
 import DataTable from "./components/data-table";
 import { fetchEtherBalance, fetchEtherRates } from "./init-data-dux";
-import { setCurrency } from "./dashboard-dux";
+import { setCurrency, selectRow } from "./dashboard-dux";
 const styles = require("./styles.module.scss");
 
 interface IDispatchProps {
@@ -16,6 +16,7 @@ interface IDispatchProps {
   fetchEtherBalance: (data: string) => void;
   fetchEtherRates: () => void;
   setCurrency: (currency: string) => void;
+  selectRow: (data: any) => void;
 }
 
 class DashboardContainer extends Component<IDispatchProps> {
@@ -26,12 +27,7 @@ class DashboardContainer extends Component<IDispatchProps> {
     await this.props.fetchEtherRates();
   }
   render() {
-    const {
-      selectedContract,
-      contractData,
-      status,
-      etherBalance
-    } = this.props.dashboard;
+    const { selectedContract, contractData, status } = this.props.dashboard;
     if (status.loading) {
       return <LoadingView />;
     }
@@ -47,8 +43,8 @@ class DashboardContainer extends Component<IDispatchProps> {
               <ContractInfo overViewData={this.props.overViewData} />
             </Col>
 
-            <Col lg={{ size: 11}}>
-              <DataTable data={contractData[selectedContract]} />
+            <Col lg={{ size: 11 }}>
+              <DataTable selectRow={this.props.selectRow} data={contractData[selectedContract]} />
             </Col>
           </Container>
           <Sidebar isOpen={false} />
@@ -67,5 +63,5 @@ const mapStateToProps = (state: IRootState) => {
 
 export default connect(
   mapStateToProps,
-  { fetchEtherBalance, fetchEtherRates, setCurrency }
+  { fetchEtherBalance, fetchEtherRates, setCurrency, selectRow }
 )(DashboardContainer);

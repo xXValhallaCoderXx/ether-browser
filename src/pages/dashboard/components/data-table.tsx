@@ -6,6 +6,7 @@ import unit from "ethjs-unit";
 
 interface IProps {
   data: any;
+  selectRow: (data: any) => void;
 }
 
 interface IState {
@@ -60,6 +61,7 @@ export default class DataTable extends Component<IProps, IState> {
           if (rowInfo && rowInfo.row) {
             return {
               onClick: (e: any) => {
+                this.props.selectRow(rowInfo.orignal);
                 this.setState({
                   selected: rowInfo.index
                 })

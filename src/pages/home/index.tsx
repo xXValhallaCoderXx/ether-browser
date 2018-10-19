@@ -22,7 +22,7 @@ class HomePageContainer extends Component<IDispatchProps> {
   render() {
     const { fetchContractData } = this.props;
     return (
-      <Container fluid style={{ padding: 0, height: "100%" }}>
+      <Container className={styles.bgWrapper} fluid style={{ padding: 0, height: "100%" }}>
         <NavBar handleChangeCurrency={() => null}/>
         <Container fluid className={styles.contentWrapper}>
           <Col
@@ -33,7 +33,7 @@ class HomePageContainer extends Component<IDispatchProps> {
           >
             <Card className={styles.cardWrapper}>
               <CardBody>
-                <h3 style={{ marginBottom: 20, textAlign: "center" }}>
+                <h3  style={{ marginBottom: 20, textAlign: "center" }}>
                   Ethereum TX Browser
                 </h3>
                 <Form status={this.props.home} fetchContractData={fetchContractData} />

@@ -1,3 +1,8 @@
+.bgWrapper {
+  background-image: linear-gradient(black, #24bfd2);
+  overflow: hidden;
+}
+
 .contentWrapper {
   height: 100%;
   width: 100%;
@@ -5,12 +10,12 @@
 
 .cardWrapper {
   margin-top: 200px;
-  box-shadow: 10px 5px 5px rgb(110, 110, 110);
 }
 
 .btnStyles {
   margin-top: 10px;
   margin-bottom: -10px;
+  background-color: #24bfd2;
 }
 
 .loadingWrapper {

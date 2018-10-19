@@ -9,6 +9,7 @@ import {
   FormFeedback,
   Col
 } from "reactstrap";
+import {Loader} from "shared/components";
 const styles = require("./styles.module.scss");
 
 interface IProps {
@@ -46,10 +47,10 @@ export default class HomeForm extends Component<IProps, IState> {
           <FormFeedback>{msg}</FormFeedback>
           {loading ? (
             <Col className={styles.loadingWrapper}>
-              <div className={styles.loading}>Loading</div>
+              <Loader />
             </Col>
           ) : (
-            <Button className={styles.btnStyles} type="submit" block>
+            <Button color="secondary" type="submit" block style={{marginTop: 10, marginBottom: -10}}>
               ENTER
             </Button>
           )}

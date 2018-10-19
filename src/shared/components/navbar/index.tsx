@@ -30,7 +30,7 @@ export default class index extends Component<IProps, IState> {
   };
   render() {
     return (
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" expand="md">
         <NavbarBrand href="/">Tx Browser</NavbarBrand>
         <NavbarToggler onClick={this._toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
