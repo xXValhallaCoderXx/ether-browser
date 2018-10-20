@@ -21,5 +21,13 @@ export const overViewData = createSelector([txData, dashboardData], (data: any, 
 });
 
 
+export const selectedRow = createSelector([dashboardData], (data: any) => {
+  console.log("SELECTED ROW SELECTOR: ", data.selectedRow);
+  if(data.selectedRow === null){
+    return null;
+  }
+  return data.selectedRow;
+})
+
 
 

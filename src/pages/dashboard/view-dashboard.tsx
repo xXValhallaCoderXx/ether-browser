@@ -4,8 +4,9 @@ import { IRootState } from "store/rootReducer";
 import { Container, Col, Card, CardBody, Row } from "reactstrap";
 import { overViewData } from "./selector";
 import ContractInfo from "./components/contract-info";
-import { NavBar, LoadingView, Sidebar } from "shared/components";
+import { NavBar, LoadingView } from "shared/components";
 import DataTable from "./components/data-table";
+import Sidebar from "./components/side-panel";
 import { fetchEtherBalance, fetchEtherRates } from "./dux-init-data";
 import { setCurrency, selectRow } from "./dux-dashboard";
 const styles = require("./styles.module.scss");
@@ -13,6 +14,7 @@ const styles = require("./styles.module.scss");
 interface IDispatchProps {
   dashboard: any;
   overViewData: any;
+  selectedRow: any;
   fetchEtherBalance: (data: string) => void;
   fetchEtherRates: () => void;
   setCurrency: (currency: string) => void;
@@ -28,26 +30,36 @@ class DashboardView extends Component<IDispatchProps> {
   }
   render() {
     const { selectedContract, contractData, status } = this.props.dashboard;
+    const { selectedRow } = this.props;
     if (status.loading) {
       return <LoadingView />;
     }
-    console.log("props: ", this.props);
+    console.log("VIEW CONTAINER SELECTED ROW: ", this.props.selectedRow);
     return (
-      <Container fluid>
+      <Container fluid style={{ padding: 0 }}>
         <NavBar
           handleChangeCurrency={(x: string) => this.props.setCurrency(x)}
         />
-        <Container className={styles.appLayoutWrapper}>
-          <Container>
-            <Col style={{ marginTop: 50, marginBottom: 50 }}>
-              <ContractInfo overViewData={this.props.overViewData} />
+        <Container fluid className={styles.appLayoutWrapper}>
+          <Container fluid style={{ flex: 8 }}>
+            <Col lg={{ size: 9, offset: 1 }} style={{marginBottom: 20, marginTop: 20}}>
+              <Card>
+                <ContractInfo overViewData={this.props.overViewData} />
+              </Card>
             </Col>
 
-            <Col lg={{ size: 11 }}>
-              <DataTable selectRow={this.props.selectRow} data={contractData[selectedContract]} />
+            <Col lg={{ size: 9, offset: 1 }}>
+              <Card>
+                <DataTable
+                  selectRow={this.props.selectRow}
+                  data={contractData[selectedContract]}
+                />
+              </Card>
             </Col>
           </Container>
-          <Sidebar isOpen={false} />
+          <Container fluid style={{ flex: 2, padding: 0 }}>
+            <Sidebar data={selectedRow} isOpen={true} />
+          </Container>
         </Container>
       </Container>
     );
