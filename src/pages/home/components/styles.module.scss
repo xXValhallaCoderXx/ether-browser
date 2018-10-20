@@ -37,3 +37,10 @@
     width: 1.25em;    
   }
 }
+
+@media (min-width: 360px) { 
+  .formLabel {
+    font-size: 11px;
+  }
+ }
+

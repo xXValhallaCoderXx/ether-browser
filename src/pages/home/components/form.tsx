@@ -41,7 +41,7 @@ export default class HomeForm extends Component<IProps, IState> {
             value={this.state.value}
             onChange={this._handleOnChange}
           />
-          <FormText color="muted">
+          <FormText color="muted" className={styles.formLabel}>
             Please enter the Ethereum contract you wish to view
           </FormText>
           <FormFeedback>{msg}</FormFeedback>

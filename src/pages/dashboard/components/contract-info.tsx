@@ -20,7 +20,7 @@ export default class ContractInfo extends Component<IProps, IState> {
   render() {
     const { contractID, etherBalance, etherFiat } = this.props.overViewData;
     return (
-      <Container className={styles.contractInfoWrapper}>
+      <Container >
         <Row>Contract ID: {contractID}</Row>
         <Row>Overview</Row>
         <Row>

@@ -21,7 +21,7 @@ interface IState {
 }
 
 interface IProps {
-  handleChangeCurrency: (currency: string) => void;
+  handleChangeCurrency?: (currency: string) => void;
 }
 
 export default class index extends Component<IProps, IState> {
@@ -31,7 +31,7 @@ export default class index extends Component<IProps, IState> {
   };
   render() {
     return (
-      <Navbar fixed="top" color="light" expand="md">
+      <Navbar fixed="top" color="light" expand="md" style={{ borderBottom: "2px solid black"}}>
         <NavbarBrand href="/">Tx Browser</NavbarBrand>
         <NavbarToggler onClick={this._toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -71,8 +71,10 @@ export default class index extends Component<IProps, IState> {
     );
   }
   _setValue = (e: any) => {
-    this.props.handleChangeCurrency(e.target.value);
-    this.setState({ selectedItem: e.target.value})
+    if(this.props.handleChangeCurrency){
+      this.props.handleChangeCurrency(e.target.value);
+      this.setState({ selectedItem: e.target.value})
+    }
   };
   _toggle = () => this.setState({ isOpen: !this.state.isOpen });
 }
