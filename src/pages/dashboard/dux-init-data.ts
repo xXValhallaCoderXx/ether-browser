@@ -1,4 +1,4 @@
-import { HomeActions } from "pages/home/home-dux";
+import { HomeActions } from "pages/home/dux-home";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { IRootState } from "store/rootReducer";
 

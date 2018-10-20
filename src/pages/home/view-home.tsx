@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import { Container, Col, Card, CardBody } from "reactstrap";
 import { NavBar } from "shared/components";
-import {IDispatchProps} from "./home-types";
 
 import Form from "./components/form";
 const styles = require("./styles.module.scss");
 
+export interface IDispatchProps {
+  fetchContractData: (data: string) => void;
+  home: {
+    loading: boolean;
+    success: boolean;
+    error: boolean;
+    msg: string;
+  }
+}
 
 class HomePageView extends Component<IDispatchProps> {
   render() {

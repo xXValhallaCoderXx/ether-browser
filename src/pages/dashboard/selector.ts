@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import { IRootState } from "store/rootReducer";
-import {currencyFormat} from "./utils";
+import {currencyFormat} from "./dashboard-utils";
 import unit from "ethjs-unit";
 
 const txData = (state: IRootState) => state.initDashboard;

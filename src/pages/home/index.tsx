@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { IRootState } from "store/rootReducer";
-import { fetchContractData } from "./home-dux";
+import { fetchContractData } from "./dux-home";
 
-import HomePageView from "./home-view";
+import HomePageView from "./view-home";
 
 
 const mapStateToProps = (state: IRootState) => {
