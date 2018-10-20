@@ -1,8 +1,3 @@
-export interface IValidation {
-  success: boolean;
-  data: string;
-}
-
 export const validateForm = (value: string) => {
   return new Promise((resolve, reject) => {
     if(value === ""){
