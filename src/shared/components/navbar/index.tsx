@@ -13,6 +13,7 @@ import {
   DropdownItem
 } from "reactstrap";
 import { Route, Switch } from "react-router-dom";
+const styles = require("./styles.module.scss");
 
 interface IState {
   isOpen: boolean;
@@ -30,7 +31,7 @@ export default class index extends Component<IProps, IState> {
   };
   render() {
     return (
-      <Navbar color="light" expand="md">
+      <Navbar fixed="top" color="light" expand="md">
         <NavbarBrand href="/">Tx Browser</NavbarBrand>
         <NavbarToggler onClick={this._toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -44,6 +45,9 @@ export default class index extends Component<IProps, IState> {
               {/* If user is on Dashboard page - Display other Navlinks */}
               <Route exact path="/dashboard">
                 <Fragment>
+                  <div className={styles.selectCurrencyWrapper}>
+                    Select Currency
+                  </div>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                       {this.state.selectedItem}
