@@ -25,36 +25,56 @@ export const overViewData = createSelector([txData, dashboardData], (data: any, 
 });
 
 
-export const selectedRow = createSelector([dashboardData, txData], (data: any, txData: any) => {
-  if(data.selectedRow === null){
+export const selectedRow = createSelector([txData, dashboardData], (data: any, dashData: any) => {
+  if(dashData.selectedRow === null){
     return null;
   }
-  // const {timeStamp, confirmations, gasUsed, gasPrice} = data.selectedRow;
-  // const { selectedCurrency, etherRates, etherBalance} = data;
-  // const convertedEth = unit.fromWei(etherBalance, 'ether');
+  const {timeStamp, confirmations, gasUsed, gasPrice, to, from, isError, hash, value} = dashData.selectedRow;
+  const {selectedCurrency} = dashData;
+
+  const { etherRates, selectedContract} = data;
+  const convertedEth = unit.fromWei(gasUsed * gasPrice, 'ether');
+  const etherValue = unit.fromWei(value, "ether");
   
-  // let sidePanelData = {
-  //   type: "",
-  //   status: "",
-  //   date:  convertUnix(timeStamp),
-  //   confirmations,
-  //   source: null,
-  //   destination: null,
-  //   ether: unit.fromWei(gasUsed * gasPrice, "ether"),
-  //   fiat: currencyFormat(selectedCurrency).format((etherRates[selectedCurrency] * convertedEth)),
-  //   currencySymbol: currenySymbol(selectedCurrency),
-  // }
-  // console.log("SELECTED ROW DATA: ", sidePanelData);
-  return null;
+  const txType = selectedContract.toLowerCase() == to.toLowerCase() ? "Recieved" : "Sent";
+
+  let sidePanelData = {
+    value: etherValue,
+    txHash: hash,
+    type: txType,
+    status: handleStatus(isError),
+    date:  convertUnix(timeStamp),
+    confirmations,
+    source: handleSource(txType, from),
+    destination: handleDestination(txType, to),
+    ether: unit.fromWei(gasUsed * gasPrice, "ether"),
+    fiat: currencyFormat(selectedCurrency).format((etherRates[selectedCurrency] * convertedEth)),
+    currencySymbol: currenySymbol(selectedCurrency),
+  }
+
+  return sidePanelData;
 })
 
+const handleDestination = (txType: string, to: string) => {
+  if(txType === "Recieved"){
+    return "N/A"
+  }else {
+    return to;
+  }
+}
 
+const handleSource = (txType: string, from: string) => {
+  if(txType !== "Recieved"){
+    return "N/A"
+  }else {
+    return from;
+  }
+}
 
-
-// <h6>Type: {currentContract.toLowerCase() == data.to.toLowerCase() ? "Recieved" : "Sent"}</h6>
-// <h6>Status:</h6>
-// <h6>Date: {convertUnix(data.timeStamp)}</h6>
-// <h6>Block Confirmations: {data.confirmations}</h6>
-// <h6>Source / Destination Wallet:</h6>
-// <h6>Ether Amount: {unit.fromWei(data.gasUsed * data.gasPrice, "ether")}</h6>
-// <h6>Fiat Value:</h6>
+const handleStatus = (isError: string) => {
+  if(isError === "1"){
+    return "Failed"
+  }else {
+    return "Complete"
+  }
+}

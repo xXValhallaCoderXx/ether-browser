@@ -6,12 +6,12 @@ import unit from "ethjs-unit";
 interface IProps {
   isOpen: boolean;
   data: any;
-  currentContract: string;
 }
 
 export default class SidePanelContainer extends Component<IProps> {
   render() {
     const { data } = this.props;
+    console.log("WHAT THATS: ", data)
     return (
       <Nav
         vertical
@@ -34,21 +34,21 @@ export default class SidePanelContainer extends Component<IProps> {
   }
 
   _handleContent = () => {
-    const { currentContract, data } = this.props;
+    const { data } = this.props;
     if (data) {
       console.log("SIDE: ", this.props);
-      let shortTx = data.hash.substring(0, 20);
+      let shortTx = data.txHash.substring(0, 20);
       return (
         <div style={{ padding: 20 }}>
           <h4 className="text-primary">Transaction Info</h4>
           <div style={{ padding: 10 }}>
-            <h6>Type: {currentContract.toLowerCase() == data.to.toLowerCase() ? "Recieved" : "Sent"}</h6>
-            <h6>Status:</h6>
-            <h6>Date: {convertUnix(data.timeStamp)}</h6>
+            <h6>Type: {data.type}</h6>
+            <h6>Status: {data.status}</h6>
+            <h6>Date: {data.date}</h6>
             <h6>Block Confirmations: {data.confirmations}</h6>
             <h6>Source / Destination Wallet:</h6>
-            <h6>Ether Amount: {unit.fromWei(data.gasUsed * data.gasPrice, "ether")}</h6>
-            <h6>Fiat Value:</h6>
+            <h6>Ether Amount: {data.value}</h6>
+            <h6>Fiat Value: {data.fiat}</h6>
             <h6>
               <span style={{ fontSize: 18 }} id="tx-hash">
                 Tx ID: {shortTx}
@@ -61,7 +61,7 @@ export default class SidePanelContainer extends Component<IProps> {
               placement="top"
               target="tx-hash"
             >
-              {data.hash}
+              {data.txHash}
             </UncontrolledTooltip>
           </div>
         </div>

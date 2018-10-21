@@ -74,17 +74,13 @@ class DashboardView extends Component<IDispatchProps, IState> {
       selectedRow,
       dashboard: { selectedContract }
     } = this.props;
-    
+
     if (isMobile) {
       return <div />;
     }
     return (
       <Container className={styles.sidePanelWrapper}>
-        <SidePanel
-          currentContract={selectedContract}
-          data={selectedRow}
-          isOpen={true}
-        />
+        <SidePanel data={selectedRow} isOpen={true} />
       </Container>
     );
   };
