@@ -5,8 +5,6 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -52,10 +50,10 @@ export default class index extends Component<IProps, IState> {
                 {/* <MobileView> */}
                   <Fragment>
                     <div className={styles.selectCurrencyWrapper}>
-                      Select Currency
+                      SELECT CURRENCY
                     </div>
                     <UncontrolledDropdown nav inNavbar>
-                      <DropdownToggle nav caret>
+                      <DropdownToggle nav caret className="text-primary">
                         {this.state.selectedItem}
                       </DropdownToggle>
                       <DropdownMenu right>

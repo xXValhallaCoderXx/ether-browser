@@ -24,7 +24,7 @@ export default class ContractInfo extends Component<IProps, IState> {
     } = this.props.overViewData;
 
     return (
-      <div>
+      <div style={{padding: 10}}>
         <div>
           <Col xs={{ size: 6, offset: 3 }} sm={{ size: 12, offset: 0 }}>
             <h4 className="text-primary">Overview</h4>
