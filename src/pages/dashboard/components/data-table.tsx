@@ -77,6 +77,7 @@ export default class DataTable extends Component<IProps, IState> {
                   selected: rowInfo.index
                 });
                 this.props.selectRow(rowInfo.original);
+                this.props.toggle();
                 if (isMobile) {
                   this.props.toggle();
                 }

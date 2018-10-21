@@ -11,13 +11,9 @@ export default class SidePanelContainer extends Component<IProps> {
   render() {
     const { data } = this.props;
     return (
-      <Nav vertical style={{backgroundColor: "white"}}>
-        <div className="d-flex flex-column" style={{ padding: 10 }}>
-          <div className="flex-grow-2">
-            <TxDetails txData={data} />
-          </div>
-        </div>
-      </Nav>
+      <div className="d-flex flex-column flex-grow-1">
+        <TxDetails txData={data} />
+      </div>
     );
   }
 }

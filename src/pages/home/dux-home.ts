@@ -47,6 +47,7 @@ export const fetchContractData = (contractID: string): ThunkType => {
         history.push("/dashboard")
       }
     } catch (e) {
+      console.log("WHAT IS THIS: ", e);
       dispatch({
         type: "@@HOME/CONTRACT_DATA_FAILED",
         payload: "A server error has occured"
