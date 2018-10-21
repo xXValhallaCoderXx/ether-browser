@@ -9,6 +9,7 @@ interface IProps {
   data: any;
   selectRow: (data: any) => void;
   height: any;
+  toggle: () => void;
 }
 
 interface IState {
@@ -69,12 +70,16 @@ export default class DataTable extends Component<IProps, IState> {
         className="-striped -highlight"
         getTrProps={(state: any, rowInfo: any) => {
           if (rowInfo && rowInfo.row) {
+
             return {
               onClick: (e: any) => {
                 this.setState({
                   selected: rowInfo.index
                 });
                 this.props.selectRow(rowInfo.original);
+                if (isMobile) {
+                  this.props.toggle();
+                }
               },
               style: {
                 background:

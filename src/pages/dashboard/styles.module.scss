@@ -14,6 +14,10 @@
   margin-top: 50px;
 }
 
+.sidePanelWrapper {
+  max-width: 400px;
+}
+
 @media (max-width: 639px) {
   .sidePanelWrapper {
     display: none;
