@@ -9,6 +9,7 @@ interface IDispatchProps {
   dashboard: any;
   overViewData: any;
   selectedRow: any;
+  tableData: any;
   fetchEtherBalance: (data: string) => void;
   fetchEtherRates: () => void;
   setCurrency: (currency: string) => void;
@@ -62,7 +63,7 @@ class DashboardView extends Component<IDispatchProps, IState> {
                   toggle={this._handleToggle}
                   height={this.state.tableHeight}
                   selectRow={this.props.selectRow}
-                  data={contractData[selectedContract]}
+                  data={this.props.tableData}
                 />
               </Card>
             </Row>

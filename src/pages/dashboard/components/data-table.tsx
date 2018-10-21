@@ -29,7 +29,7 @@ export default class DataTable extends Component<IProps, IState> {
         columns={[
           {
             Header: "TxHash",
-            accessor: "hash"
+            accessor: "txHash"
           },
           {
             Header: "From",
@@ -40,25 +40,16 @@ export default class DataTable extends Component<IProps, IState> {
             accessor: "to"
           },
           {
-            id: "timeStamp",
+            accessor: "date",
             Header: "Date",
-            accessor: (d: any) => {
-              return convertUnix(d.timeStamp);
-            }
           },
           {
-            id: "value",
+            accessor: "ether",
             Header: "Ether",
-            accessor: (d: any) => {
-              return unit.fromWei(d.gasUsed * d.gasPrice, "ether");
-            }
           },
           {
-            id: "value",
+            accessor: "fiatValue",
             Header: "Fiat Value",
-            accessor: (d: any) => {
-              return unit.fromWei(d.gasUsed * d.gasPrice, "ether");
-            }
           }
         ]}
         defaultPageSize={20}

@@ -29,25 +29,26 @@ export const selectedRow = createSelector([txData, dashboardData], (data: any, d
   if(dashData.selectedRow === null){
     return null;
   }
-  const {timeStamp, confirmations, gasUsed, gasPrice, to, from, isError, hash, value} = dashData.selectedRow;
+  console.log("HHMHMHM: ", data)
+  console.log("chdhheh: ", dashData)
+  const {date, confirmations, ether, txHash, to, from, isError, gasUsed, gasPrice, fiatValue} = dashData.selectedRow;
   const {selectedCurrency} = dashData;
 
   const { etherRates, selectedContract} = data;
   const convertedEth = unit.fromWei(gasUsed * gasPrice, 'ether');
-  const etherValue = unit.fromWei(value, "ether");
   
   const txType = selectedContract.toLowerCase() == to.toLowerCase() ? "Recieved" : "Sent";
-
+  console.log("THE SELECTED ROW", dashData.selectedRow);
   let sidePanelData = {
-    txEtherFiat: currencyFormat(selectedCurrency).format((etherRates[selectedCurrency] * etherValue)),
-    value: etherValue,
-    txHash: hash,
+    txEtherFiat: fiatValue,
+    value: ether,
+    txHash: txHash,
     type: txType,
     status: isError === "1" ? "Failed" : "Complete",
-    date:  convertUnix(timeStamp),
+    date,
     confirmations,
     source: txType !== "Recieved" ? null : from,
-    destination:  txType === "Recieved" ? null : to,
+    destination: txType === "Recieved" ? null : to,
     ether: unit.fromWei(gasUsed * gasPrice, "ether"),
     fiat: currencyFormat(selectedCurrency).format((etherRates[selectedCurrency] * convertedEth)),
     currencySymbol: currenySymbol(selectedCurrency),
@@ -64,7 +65,11 @@ export const tableData = createSelector([txData, dashboardData], (data: any, das
   let parsedData = contractData[selectedContract].map((tx: any) => {
     const etherValue = unit.fromWei(tx.value, "ether");
     return {
+      confirmations: tx.confirmations,
+      gasUsed: tx.gasUsed,
+      gasPrice: tx.gasPrice,
       txHash: tx.hash,
+      isError: tx.isError,
       from: tx.from,
       to: tx.to,
       date: convertUnix(tx.timeStamp),
@@ -74,4 +79,3 @@ export const tableData = createSelector([txData, dashboardData], (data: any, das
   })
   return parsedData;
 });
-
