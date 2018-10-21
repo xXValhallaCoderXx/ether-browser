@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Col, Card, Row } from "reactstrap";
+import { Col, Card, Row } from "reactstrap";
 import { NavBar, LoadingView } from "shared/components";
 import { DataTable, SidePanel, ContractInfo, TxModal } from "./components";
 import { isMobile } from "react-device-detect";

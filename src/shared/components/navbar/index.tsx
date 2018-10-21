@@ -47,11 +47,6 @@ export default class index extends Component<IProps, IState> {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <Switch>
-              <Route exact path="/">
-                <NavItem>
-                  <NavLink href="/components/">About</NavLink>
-                </NavItem>
-              </Route>
               {/* If user is on Dashboard page - Display other Navlinks */}
               <Route exact path="/dashboard">
                 {/* <MobileView> */}

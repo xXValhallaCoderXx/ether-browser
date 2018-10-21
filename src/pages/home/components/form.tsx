@@ -6,10 +6,12 @@ import {
   Label,
   FormText,
   Form,
+  InputGroup,
+  InputGroupAddon,
   FormFeedback,
   Col
 } from "reactstrap";
-import {Loader} from "shared/components";
+import { Loader } from "shared/components";
 const styles = require("./styles.module.scss");
 
 interface IProps {
@@ -33,28 +35,34 @@ export default class HomeForm extends Component<IProps, IState> {
     const { loading, error, msg } = this.props.status;
     return (
       <Form onSubmit={this._handleSubmit}>
-        <FormGroup>
-          <Label for="contractID">Contract ID</Label>
+        <InputGroup>
+          <InputGroupAddon className="text-primary" addonType="prepend">
+            Contract ID
+          </InputGroupAddon>
           <Input
             invalid={error}
             type="text"
             value={this.state.value}
             onChange={this._handleOnChange}
           />
-          <FormText color="muted" className={styles.formLabel}>
-            Please enter the Ethereum contract you wish to view
-          </FormText>
           <FormFeedback>{msg}</FormFeedback>
+        </InputGroup>
+
+        <FormText color="muted" className={styles.formLabel}>
+          Please enter the Ethereum contract you wish to view
+        </FormText>
+        <div
+          className="d-flex justify-content-center"
+          style={{ marginTop: 5, height: 40 }}
+        >
           {loading ? (
-            <Col className={styles.loadingWrapper}>
-              <Loader />
-            </Col>
+            <Loader />
           ) : (
-            <Button color="secondary" type="submit" block style={{marginTop: 10, marginBottom: -10}}>
+            <Button color="secondary" type="submit" block>
               ENTER
             </Button>
           )}
-        </FormGroup>
+        </div>
       </Form>
     );
   }
