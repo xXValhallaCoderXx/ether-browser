@@ -55,3 +55,23 @@ export const selectedRow = createSelector([txData, dashboardData], (data: any, d
 
   return sidePanelData;
 })
+
+
+export const tableData = createSelector([txData, dashboardData], (data: any, dashData: any) => {
+  const {contractData, selectedContract, etherRates} = data;
+  const {selectedCurrency} = dashData;
+
+  let parsedData = contractData[selectedContract].map((tx: any) => {
+    const etherValue = unit.fromWei(tx.value, "ether");
+    return {
+      txHash: tx.hash,
+      from: tx.from,
+      to: tx.to,
+      date: convertUnix(tx.timeStamp),
+      ether: etherValue,
+      fiatValue: currencyFormat(selectedCurrency).format((etherRates[selectedCurrency] * etherValue)),
+    };
+  })
+  return parsedData;
+});
+

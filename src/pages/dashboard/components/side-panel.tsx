@@ -20,7 +20,6 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
 
   function _handleContent() {
     if (txData) {
-      console.log("TX DATA: ", txData);
       return (
         <Fragment>
           <h4 className="text-primary">Transaction Info</h4>

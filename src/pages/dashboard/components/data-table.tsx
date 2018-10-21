@@ -48,7 +48,7 @@ export default class DataTable extends Component<IProps, IState> {
           },
           {
             id: "value",
-            Header: "Value",
+            Header: "Ether",
             accessor: (d: any) => {
               return unit.fromWei(d.gasUsed * d.gasPrice, "ether");
             }
