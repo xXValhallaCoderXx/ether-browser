@@ -1,7 +1,4 @@
 .appLayoutWrapper {
-  display: flex;
-  flex-direction: row;
-  padding: 0px;
   height: 100%;
   background-image: linear-gradient(black, #24bfd2);
 }
@@ -21,6 +18,9 @@
 @media (max-width: 639px) {
   .sidePanelWrapper {
     display: none;
+  }
+  .contentViewWrapper {
+    min-width: 0px;
   }
 }
 

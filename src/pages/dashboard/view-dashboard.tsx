@@ -44,14 +44,14 @@ class DashboardView extends Component<IDispatchProps, IState> {
       return <LoadingView />;
     }
     return (
-      <Container fluid className={styles.appLayoutWrapper}>
+      <div className={`d-flex flex-row justify-content-center ${styles.appLayoutWrapper}`}>
         <NavBar
           handleChangeCurrency={(x: string) => this.props.setCurrency(x)}
         />
-        <Container id="content-view" className={styles.contentViewWrapper}>
-          <Col lg={{ size: 10, offset: 1 }}>
+        <div id="content-view" className={`flex-grow-1 ${styles.contentViewWrapper}`} style={{maxWidth: 1000}}>
+          <Col xs={{size: 10, offset: 1}}>
             <Row>
-              <Card style={{ width: "100%", padding: 20 }}>
+              <Card style={{width: "100%"}}>
                 <ContractInfo overViewData={this.props.overViewData} />
               </Card>
             </Row>
@@ -66,31 +66,29 @@ class DashboardView extends Component<IDispatchProps, IState> {
               </Card>
             </Row>
           </Col>
-        </Container>
+        </div>
         {this._handleDetailView()}
-      </Container>
+      </div>
     );
   }
 
   _handleDetailView = () => {
-    const {
-      selectedRow,
-      dashboard: { selectedContract }
-    } = this.props;
-
+    const { selectedRow } = this.props;
     if (isMobile) {
       return (
         <TxModal
           toggle={this._handleToggle}
-          data={selectedRow}
+          txData={selectedRow}
           isOpen={this.state.isOpen}
         />
       );
     }
     return (
-      <Container className={styles.sidePanelWrapper}>
-        <SidePanel data={selectedRow} isOpen={true} />
-      </Container>
+      <div className="d-flex align-content-center flex-wrap">
+        <Card className={`align-self-center ${styles.sidePanelWrapper}`}>
+          <SidePanel data={selectedRow} isOpen={true} />
+        </Card>
+      </div>
     );
   };
 
