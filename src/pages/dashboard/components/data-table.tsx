@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { convertUnix } from "shared/utils";
 import { isMobile } from "react-device-detect";
-import unit from "ethjs-unit";
+import { Badge } from "reactstrap";
 
 interface IProps {
   data: any;
@@ -41,15 +40,26 @@ export default class DataTable extends Component<IProps, IState> {
           },
           {
             accessor: "date",
-            Header: "Date",
+            Header: "Date"
           },
           {
             accessor: "ether",
-            Header: "Ether",
+            Header: "Ether"
           },
           {
             accessor: "fiatValue",
-            Header: "Fiat Value",
+            Header: "Fiat Value"
+          },
+          {
+            accessor: "type",
+            Header: "Type",
+            Cell: row => (
+              <span className="d-flex justify-content-center align-items-center">
+                <Badge color={row.value === "IN" ? "success" : "warning"}>
+                  {row.value === "IN" ? "IN" : "OUT"}
+                </Badge>
+              </span>
+            )
           }
         ]}
         defaultPageSize={20}
@@ -60,8 +70,10 @@ export default class DataTable extends Component<IProps, IState> {
         }}
         className="-striped -highlight"
         getTrProps={(state: any, rowInfo: any) => {
+          console.log("CHECKING ROW: ", rowInfo)
+          //const {isError} = rowInfo.original;
           if (rowInfo && rowInfo.row) {
-
+            const {isError} = rowInfo.original;
             return {
               onClick: (e: any) => {
                 this.setState({
@@ -73,8 +85,11 @@ export default class DataTable extends Component<IProps, IState> {
                 }
               },
               style: {
-                background:
-                  rowInfo.index === this.state.selected ? "#24bfd2" : "white",
+                backgroundColor: this._handleRowBackground(isError, rowInfo.index),
+                //border : isError === "1" ? "1px solid red" : null,
+                //backgroundColor: isError === "1" ? "rgba(255,0,0,0.3)" : null,
+                // background:
+                //   rowInfo.index === this.state.selected ? "#24bfd2" : "white",
                 color: rowInfo.index === this.state.selected ? "white" : "black"
               }
             };
@@ -84,5 +99,17 @@ export default class DataTable extends Component<IProps, IState> {
         }}
       />
     );
+  }
+
+  _handleRowBackground = (isError: any, rowIndex: any) => {
+    if(isError !== "1" && rowIndex === this.state.selected){
+      return "#24bfd2"
+    }else if (isError === "1" && rowIndex !== this.state.selected){
+      return "rgba(255,0,0,0.3)"
+    }else if(isError === "1" && rowIndex === this.state.selected){
+      return "#24bfd2"
+    }else {
+      return "white"
+    }
   }
 }

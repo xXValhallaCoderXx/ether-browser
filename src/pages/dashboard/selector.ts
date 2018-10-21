@@ -63,6 +63,7 @@ export const tableData = createSelector([txData, dashboardData], (data: any, das
   const {selectedCurrency} = dashData;
 
   let parsedData = contractData[selectedContract].map((tx: any) => {
+    const txType = selectedContract.toLowerCase() == tx.to.toLowerCase() ? "IN" : "OUT";
     const etherValue = unit.fromWei(tx.value, "ether");
     return {
       confirmations: tx.confirmations,
@@ -75,6 +76,7 @@ export const tableData = createSelector([txData, dashboardData], (data: any, das
       date: convertUnix(tx.timeStamp),
       ether: etherValue,
       fiatValue: currencyFormat(selectedCurrency).format((etherRates[selectedCurrency] * etherValue)),
+      type: txType
     };
   })
   return parsedData;
