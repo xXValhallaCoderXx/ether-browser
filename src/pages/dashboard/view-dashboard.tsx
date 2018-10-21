@@ -34,7 +34,6 @@ class DashboardView extends Component<IDispatchProps, IState> {
    
   }
   async componentDidMount() {
-    console.log("PROPS: ", this.props);
     window.addEventListener("resize", this._contentViewHeight);
     if(this.props.match.params.address){
       await this.props.fetchContractData(this.props.match.params.address)
