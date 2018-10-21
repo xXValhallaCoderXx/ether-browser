@@ -13,7 +13,6 @@ export const overViewData = createSelector(
   (data: any, dashData: any) => {
     const { selectedCurrency } = dashData;
     const convertedEth = unit.fromWei(data.etherBalance, "ether");
-    console.log("ADATA: ", data);
     if (data.selectedContract === null) {
       return null;
     } else {
