@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 import { IRootState } from "store/rootReducer";
 import {currencyFormat} from "./dashboard-utils";
+import {currenySymbol} from "./dashboard-utils";
 import unit from "ethjs-unit";
 
 const txData = (state: IRootState) => state.initDashboard;
@@ -14,6 +15,8 @@ export const overViewData = createSelector([txData, dashboardData], (data: any, 
     selectedCurrency,
     contractID: data.selectedContract,
     etherBalance: convertedEth,
+    currencySymbol: currenySymbol(selectedCurrency),
+    ertherRate: data.etherRates[selectedCurrency],
     etherFiat: currencyFormat(selectedCurrency).format((data.etherRates[selectedCurrency] * convertedEth)),
     totalTx: data.contractData[data.selectedContract].length
   };
@@ -22,7 +25,6 @@ export const overViewData = createSelector([txData, dashboardData], (data: any, 
 
 
 export const selectedRow = createSelector([dashboardData], (data: any) => {
-  console.log("SELECTED ROW SELECTOR: ", data.selectedRow);
   if(data.selectedRow === null){
     return null;
   }

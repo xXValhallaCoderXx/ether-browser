@@ -91,26 +91,9 @@ class DashboardView extends Component<IDispatchProps, IState> {
 
 export default DashboardView;
 
-{
-  /* <Container fluid className={styles.appLayoutWrapper}>
-<Container fluid style={{ flex: 8 }}>
-  <Col lg={{ size: 9, offset: 1 }} style={{marginBottom: 20, marginTop: 20}}>
-    <Card>
-      <ContractInfo overViewData={this.props.overViewData} />
-    </Card>
-  </Col>
-
-  <Col lg={{ size: 9, offset: 1 }}>
-    <Card>
-      <DataTable
-        selectRow={this.props.selectRow}
-        data={contractData[selectedContract]}
-      />
-    </Card>
-  </Col>
-</Container>
-<Container fluid style={{ flex: 2, padding: 0 }}>
-  <Sidebar data={selectedRow} isOpen={true} />
-</Container>
-</Container> */
-}
+// if (isMobile) {
+//   alert("OPEN MODAL")
+// }else {
+//   console.log("DESKTOP: ")
+//   this.props.selectRow(rowInfo.original);
+// }

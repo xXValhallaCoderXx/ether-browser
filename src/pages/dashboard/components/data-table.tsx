@@ -71,16 +71,10 @@ export default class DataTable extends Component<IProps, IState> {
           if (rowInfo && rowInfo.row) {
             return {
               onClick: (e: any) => {
-                if (isMobile) {
-                  alert("OPEN MODAL")
-                }else {
-                  console.log("DESKTOP: ")
-                  this.props.selectRow(rowInfo.original);
-                }
-                
                 this.setState({
                   selected: rowInfo.index
                 });
+                this.props.selectRow(rowInfo.original);
               },
               style: {
                 background:

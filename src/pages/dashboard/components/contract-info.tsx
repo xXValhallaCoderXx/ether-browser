@@ -1,9 +1,5 @@
 import React, { Component, Fragment } from "react";
-import {
-  Container,
-  Col,
-  Row
-} from "reactstrap";
+import { Container, Col, Row } from "reactstrap";
 const styles = require("./styles.module.scss");
 
 interface IProps {
@@ -15,22 +11,26 @@ interface IState {
 }
 export default class ContractInfo extends Component<IProps, IState> {
   state = {
-    isOpen: false 
-  }
+    isOpen: false
+  };
   render() {
-    const { contractID, etherBalance, etherFiat } = this.props.overViewData;
+    const { contractID, etherBalance, etherFiat, currencySymbol, ertherRate } = this.props.overViewData;
     return (
-      <Container >
-        <Row>Contract ID: {contractID}</Row>
-        <Row>Overview</Row>
+      <Container>
         <Row>
-          <Col>
-            <div>Total Ether: {etherBalance}</div>
-            <div>Ether Value: {etherFiat}</div>
-          </Col>
+          <h4 className="text-primary">Overview</h4>
+        </Row>
+        <Row className="text-secondary">
+          <h5>Contract: {contractID}</h5>
+        </Row>
+
+        <Row className="text-secondary">
+          <Col style={{paddingLeft: 0}}><h6>Balance: {etherBalance}</h6></Col>
+          <Col style={{paddingLeft: 0}}><h6>Ether Value: {etherFiat} <span style={{fontSize: 10}}>
+            @ {currencySymbol}{ertherRate}</span></h6></Col>
         </Row>
       </Container>
     );
   }
-  toggle = () => this.setState({isOpen: !this.state.isOpen})
+  toggle = () => this.setState({ isOpen: !this.state.isOpen });
 }

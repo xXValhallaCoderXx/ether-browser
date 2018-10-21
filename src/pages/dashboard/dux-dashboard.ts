@@ -23,7 +23,6 @@ export const setCurrency = (currency: string): DashboardActions => {
 };
 
 export const selectRow = (rowData: any): DashboardActions => {
-  console.log("DATA: ", rowData)
   return { type: "@@DASHBOARD/SELECTED_ROW", payload: rowData };
 };
 
