@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Col, Card, Row } from "reactstrap";
 import { NavBar, LoadingView } from "shared/components";
-import { DataTable, SidePanel, ContractInfo } from "./components";
+import { DataTable, SidePanel, ContractInfo, TxModal } from "./components";
 import { isMobile } from "react-device-detect";
 const styles = require("./styles.module.scss");
 
@@ -17,11 +17,13 @@ interface IDispatchProps {
 
 interface IState {
   tableHeight: any;
+  isOpen: boolean;
 }
 
 class DashboardView extends Component<IDispatchProps, IState> {
   state = {
-    tableHeight: 500
+    tableHeight: 500,
+    isOpen: false
   };
 
   componentWillUnmount() {
@@ -56,6 +58,7 @@ class DashboardView extends Component<IDispatchProps, IState> {
             <Row className={styles.datagridWrapper}>
               <Card style={{ padding: 20, width: "100%" }}>
                 <DataTable
+                  toggle={this._handleToggle}
                   height={this.state.tableHeight}
                   selectRow={this.props.selectRow}
                   data={contractData[selectedContract]}
@@ -76,7 +79,13 @@ class DashboardView extends Component<IDispatchProps, IState> {
     } = this.props;
 
     if (isMobile) {
-      return <div />;
+      return (
+        <TxModal
+          toggle={this._handleToggle}
+          data={selectedRow}
+          isOpen={this.state.isOpen}
+        />
+      );
     }
     return (
       <Container className={styles.sidePanelWrapper}>
@@ -94,6 +103,8 @@ class DashboardView extends Component<IDispatchProps, IState> {
       this.setState({ tableHeight: 500 });
     }
   };
+
+  _handleToggle = () => this.setState({ isOpen: !this.state.isOpen });
 }
 
 export default DashboardView;
