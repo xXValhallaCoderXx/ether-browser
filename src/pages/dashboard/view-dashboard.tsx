@@ -56,7 +56,7 @@ class DashboardView extends Component<IDispatchProps, IState> {
               </Card>
             </Row>
             <Row className={styles.datagridWrapper}>
-              <Card style={{ padding: 20, width: "100%" }}>
+              <Card style={{ padding: 10, width: "100%" }}>
                 <DataTable
                   toggle={this._handleToggle}
                   height={this.state.tableHeight}

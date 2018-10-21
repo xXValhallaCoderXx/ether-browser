@@ -2,14 +2,11 @@ import React, { Component } from "react";
 import {
   Button,
   Input,
-  FormGroup,
-  Label,
   FormText,
   Form,
   InputGroup,
   InputGroupAddon,
-  FormFeedback,
-  Col
+  FormFeedback
 } from "reactstrap";
 import { Loader } from "shared/components";
 const styles = require("./styles.module.scss");
