@@ -1,32 +1,151 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Input,
+  InputGroup,
+  InputGroupAddon
+} from "reactstrap";
+import {ITxData} from "shared/types";
 
 interface IProps {
-  txData: any;
+  txData: ITxData;
   toggle: () => void;
   isOpen: boolean;
 }
 
 const SelectedFileView: React.SFC<IProps> = ({ txData, toggle, isOpen }) => {
-  if(txData){
+  if (txData) {
     let shortTx = txData.txHash.substring(0, 20);
     return (
-      <Modal isOpen={isOpen} toggle={toggle}>
-        <ModalHeader className="text-primary" toggle={toggle}>Tx Detail</ModalHeader>
+      <Modal centered isOpen={isOpen} toggle={toggle} size="sm">
+        <ModalHeader className="text-primary" toggle={toggle}>
+          Tx Detail
+        </ModalHeader>
         <ModalBody>
-          <h6>Type: {txData.type}</h6>
-          <h6>Status: {txData.status}</h6>
-          <h6>Date: {txData.date}</h6>
-          <h6>Block Confirmations: {txData.confirmations}</h6>
-          <h6>Source / Destination Wallet:</h6>
-          <h6>Ether Amount: {txData.value}</h6>
-          <h6>Fiat Value: {txData.fiat}</h6>
-          <h6>
-            <span style={{ fontSize: 18 }} id="tx-hash">
-              Tx ID: {shortTx}
-              ...
-            </span>
-          </h6>
+          <InputGroup style={{ marginBottom: 10 }}>
+            <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+              Tx ID
+            </InputGroupAddon>
+            <Input
+              placeholder="sm"
+              bsSize="sm"
+              style={{ backgroundColor: "white" }}
+              type="text"
+              value={txData.txHash}
+              disabled
+            />
+          </InputGroup>
+          <InputGroup style={{ marginBottom: 10 }}>
+            <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+              Ether
+            </InputGroupAddon>
+            <Input
+              placeholder="sm"
+              bsSize="sm"
+              style={{ backgroundColor: "white" }}
+              type="text"
+              value={txData.value}
+              disabled
+            />
+          </InputGroup>
+          <InputGroup style={{ marginBottom: 10 }}>
+            <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+              Value
+            </InputGroupAddon>
+            <Input
+              placeholder="sm"
+              bsSize="sm"
+              style={{ backgroundColor: "white" }}
+              type="text"
+              value={txData.txEtherFiat}
+              disabled
+            />
+          </InputGroup>
+          <InputGroup style={{ marginBottom: 10 }}>
+            <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+              Fee
+            </InputGroupAddon>
+            <Input
+              placeholder="sm"
+              bsSize="sm"
+              style={{ backgroundColor: "white" }}
+              type="text"
+              value={txData.fiat}
+              disabled
+            />
+          </InputGroup>
+          <InputGroup style={{ marginBottom: 10 }}>
+            <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+              Date
+            </InputGroupAddon>
+            <Input
+              placeholder="sm"
+              bsSize="sm"
+              style={{ backgroundColor: "white" }}
+              type="text"
+              value={txData.date}
+              disabled
+            />
+          </InputGroup>
+          <InputGroup style={{ marginBottom: 10 }}>
+            <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+              Type
+            </InputGroupAddon>
+            <Input
+              placeholder="sm"
+              bsSize="sm"
+              style={{ backgroundColor: "white" }}
+              type="text"
+              value={txData.type}
+              disabled
+            />
+          </InputGroup>
+          <InputGroup style={{ marginBottom: 10 }}>
+            <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+              Status
+            </InputGroupAddon>
+            <Input
+              invalid={txData.status !== "Complete" ? true : false}
+              valid={txData.status === "Complete" ? true : false}
+              placeholder="sm"
+              bsSize="sm"
+              style={{ backgroundColor: "white" }}
+              type="text"
+              value={txData.status}
+              disabled
+            />
+          </InputGroup>
+
+          <InputGroup style={{ marginBottom: 10 }}>
+            <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+              Blocks
+            </InputGroupAddon>
+            <Input
+              placeholder="sm"
+              bsSize="sm"
+              style={{ backgroundColor: "white" }}
+              type="text"
+              value={txData.confirmations}
+              disabled
+            />
+          </InputGroup>
+          <InputGroup style={{ marginBottom: 10 }}>
+            <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+              Source / Dest
+            </InputGroupAddon>
+            <Input
+              placeholder="sm"
+              bsSize="sm"
+              style={{ backgroundColor: "white" }}
+              type="text"
+              value={""}
+              disabled
+            />
+          </InputGroup>
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>

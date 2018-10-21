@@ -5,20 +5,22 @@ import {
   InputGroup,
   InputGroupAddon
 } from "reactstrap";
+import { ITxData } from "shared/types";
 
 interface IProps {
-  txData: any;
+  txData: ITxData;
 }
 
 const TxDetails: React.SFC<IProps> = ({ txData }) => {
   return (
-    <div style={{ height: 390, width: 330, padding: 10 }}>
+    <div style={{ height: 430, width: 330, padding: 10 }}>
       {_handleContent()}
     </div>
   );
 
   function _handleContent() {
     if (txData) {
+      console.log("TX DATA: ", txData);
       return (
         <Fragment>
           <h4 className="text-primary">Transaction Info</h4>
@@ -28,7 +30,6 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
                 Tx ID
               </InputGroupAddon>
               <Input
-                placeholder="sm"
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
@@ -41,7 +42,6 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
                 Ether
               </InputGroupAddon>
               <Input
-                placeholder="sm"
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
@@ -54,7 +54,18 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
                 Value
               </InputGroupAddon>
               <Input
-                placeholder="sm"
+                bsSize="sm"
+                style={{ backgroundColor: "white" }}
+                type="text"
+                value={txData.txEtherFiat}
+                disabled
+              />
+            </InputGroup>
+            <InputGroup style={{ marginBottom: 10 }}>
+              <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
+                Fee
+              </InputGroupAddon>
+              <Input
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
@@ -67,7 +78,6 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
                 Date
               </InputGroupAddon>
               <Input
-                placeholder="sm"
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
@@ -80,7 +90,6 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
                 Type
               </InputGroupAddon>
               <Input
-                placeholder="sm"
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
@@ -95,7 +104,6 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
               <Input
                 invalid={txData.status !== "Complete" ? true : false}
                 valid={txData.status === "Complete" ? true : false}
-                placeholder="sm"
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
@@ -109,7 +117,6 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
                 Blocks
               </InputGroupAddon>
               <Input
-                placeholder="sm"
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
@@ -119,14 +126,13 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
             </InputGroup>
             <InputGroup style={{ marginBottom: 10 }}>
               <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
-                Source / Dest
+                {txData.source === null ? "Destination" : "Source"}
               </InputGroupAddon>
               <Input
-                placeholder="sm"
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
-                value={""}
+                value={txData.source === null ? txData.destination : txData.source}
                 disabled
               />
             </InputGroup>
@@ -135,10 +141,16 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
       );
     }
     return (
-      <div className="d-flex justify-content-center align-items-center flex-column" style={{height: "100%"}}>
-        <h2 className="text-primary" style={{marginBottom: 20}}>Select a Tx</h2>
-        <img src={require("shared/images/magnify-glass.png")} style={{height: 100, width: 100}} />
-        <h2 className="text-primary" style={{marginTop: 20}}>For more info...</h2>
+      <div
+        className="d-flex justify-content-center align-items-center flex-column"
+        style={{ height: "100%" }}
+      >
+        <h2 className="text-primary" style={{ marginBottom: 20 }}>
+          Select a Tx
+        </h2>
+        <h2 className="text-primary" style={{ marginTop: 20 }}>
+          For more info...
+        </h2>
       </div>
     );
   }

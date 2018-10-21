@@ -1,6 +1,3 @@
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { IRootState } from "store/rootReducer";
-
 // This Redux Dux file will handle Initial Data Loading For Application
 
 export interface IDashboardState {
@@ -14,9 +11,6 @@ export type DashboardActions =
       payload: any;
     }
   | { type: "@@DASHBOARD/SELECTED_ROW"; payload: any };
-
-type ThunkType = ThunkAction<Promise<any>, IRootState, null, any>;
-type ThunkDisp = ThunkDispatch<IRootState, void, DashboardActions>;
 
 export const setCurrency = (currency: string): DashboardActions => {
   return { type: "@@DASHBOARD/SELECT_CURRENCY", payload: currency };

@@ -16,7 +16,7 @@ interface IDispatchProps {
 }
 
 interface IState {
-  tableHeight: any;
+  tableHeight: number;
   isOpen: boolean;
 }
 
