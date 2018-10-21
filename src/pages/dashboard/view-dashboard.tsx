@@ -14,6 +14,8 @@ interface IDispatchProps {
   fetchEtherRates: () => void;
   setCurrency: (currency: string) => void;
   selectRow: (data: any) => void;
+  fetchContractData: (address: string) => void;
+  match: any;
 }
 
 interface IState {
@@ -29,9 +31,14 @@ class DashboardView extends Component<IDispatchProps, IState> {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this._contentViewHeight);
+   
   }
   async componentDidMount() {
+    console.log("PROPS: ", this.props);
     window.addEventListener("resize", this._contentViewHeight);
+    if(this.props.match.params.address){
+      await this.props.fetchContractData(this.props.match.params.address)
+    }
     // Fetch required data based off Publioc key Contract ID
     const { selectedContract } = this.props.dashboard;
     await this.props.fetchEtherBalance(selectedContract);
@@ -41,7 +48,7 @@ class DashboardView extends Component<IDispatchProps, IState> {
   render() {
     const { selectedContract, contractData, status } = this.props.dashboard;
 
-    if (status.loading) {
+    if (status.loading || selectedContract === null) {
       return <LoadingView />;
     }
     return (
