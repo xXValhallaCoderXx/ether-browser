@@ -63,7 +63,7 @@ export default class DataTable extends Component<IProps, IState> {
         ]}
         defaultPageSize={20}
         style={{
-          fontSize: 13,
+          fontSize: 14,
           width: "100%",
           height: `${this.props.height}px`
         }}
