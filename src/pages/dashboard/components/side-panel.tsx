@@ -7,7 +7,7 @@ interface IProps {
 
 const TxDetails: React.SFC<IProps> = ({ txData }) => {
   return (
-    <div className="d-flex flex-column flex-grow-1">{_handleContent()}</div>
+    <div style={{height: 300, width: 330, padding: 10}}>{_handleContent()}</div>
   );
 
   function _handleContent() {
@@ -42,7 +42,7 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
         </Fragment>
       );
     }
-    return <Fragment>Click on a TX for more details</Fragment>;
+    return <Fragment><h4>Select A Tx</h4><img src={require("shared/images/magnify-glass.png")} height="100" /></Fragment>;
   }
 };
 

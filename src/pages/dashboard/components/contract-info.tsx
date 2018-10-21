@@ -1,14 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Col } from "reactstrap";
-import {
-  UncontrolledTooltip,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  FormGroup,
-  Label
-} from "reactstrap";
-import { isMobile } from "react-device-detect";
+import { Input, InputGroup, InputGroupAddon } from "reactstrap";
 
 interface IProps {
   overViewData: any;
@@ -22,18 +14,12 @@ export default class ContractInfo extends Component<IProps, IState> {
     isOpen: false
   };
   render() {
-    const {
-      contractID,
-      etherBalance,
-      etherFiat,
-      currencySymbol,
-      ertherRate
-    } = this.props.overViewData;
+    const { contractID, etherBalance, etherFiat } = this.props.overViewData;
 
     return (
       <div style={{ padding: 10 }}>
         <div>
-          <Col style={{marginLeft: -15}}>
+          <Col style={{ marginLeft: -15 }}>
             <h4 className="text-primary">Contract Overview</h4>
           </Col>
         </div>
