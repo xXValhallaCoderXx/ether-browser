@@ -44,14 +44,14 @@ class DashboardView extends Component<IDispatchProps, IState> {
       return <LoadingView />;
     }
     return (
-      <div className={`d-flex flex-row ${styles.appLayoutWrapper}`}>
+      <div className={`d-flex flex-row justify-content-center ${styles.appLayoutWrapper}`}>
         <NavBar
           handleChangeCurrency={(x: string) => this.props.setCurrency(x)}
         />
-        <div id="content-view" className={`flex-grow-1 ${styles.contentViewWrapper}`}>
-          <Col sm={{size: 6}} lg={{ size: 10, offset: 1 }}>
+        <div id="content-view" className={`flex-grow-1 ${styles.contentViewWrapper}`} style={{maxWidth: 1000}}>
+          <Col xs={{size: 10, offset: 1}}>
             <Row>
-              <Card style={{ width: "100%", padding: 20 }}>
+              <Card style={{width: "100%"}}>
                 <ContractInfo overViewData={this.props.overViewData} />
               </Card>
             </Row>
@@ -74,29 +74,22 @@ class DashboardView extends Component<IDispatchProps, IState> {
 
   _handleDetailView = () => {
     const { selectedRow } = this.props;
+    if (isMobile) {
+      return (
+        <TxModal
+          toggle={this._handleToggle}
+          txData={selectedRow}
+          isOpen={this.state.isOpen}
+        />
+      );
+    }
     return (
-      <TxModal
-        toggle={this._handleToggle}
-        txData={selectedRow}
-        isOpen={this.state.isOpen}
-      />
+      <div className="d-flex align-content-center flex-wrap">
+        <Card className={`align-self-center ${styles.sidePanelWrapper}`}>
+          <SidePanel data={selectedRow} isOpen={true} />
+        </Card>
+      </div>
     );
-    // if (isMobile) {
-    //   return (
-    //     <TxModal
-    //       toggle={this._handleToggle}
-    //       txData={selectedRow}
-    //       isOpen={this.state.isOpen}
-    //     />
-    //   );
-    // }
-    // return (
-    //   <div className="d-flex align-content-center flex-wrap">
-    //     <Card className={`align-self-center ${styles.sidePanelWrapper}`}>
-    //       <SidePanel data={selectedRow} isOpen={true} />
-    //     </Card>
-    //   </div>
-    // );
   };
 
   _contentViewHeight = () => {
