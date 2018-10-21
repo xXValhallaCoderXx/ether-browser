@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "ethjs-unit": "^0.1.6",
+    "express": "^4.16.4",
     "history": "^4.7.2",
     "react": "^16.5.2",
     "react-device-detect": "^1.6.1",
