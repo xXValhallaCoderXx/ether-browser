@@ -44,11 +44,11 @@ class DashboardView extends Component<IDispatchProps, IState> {
       return <LoadingView />;
     }
     return (
-      <Container fluid className={styles.appLayoutWrapper}>
+      <div className={`d-flex flex-row ${styles.appLayoutWrapper}`}>
         <NavBar
           handleChangeCurrency={(x: string) => this.props.setCurrency(x)}
         />
-        <Container id="content-view" className={styles.contentViewWrapper}>
+        <div id="content-view" className={`flex-grow-1 ${styles.contentViewWrapper}`}>
           <Col lg={{ size: 10, offset: 1 }}>
             <Row>
               <Card style={{ width: "100%", padding: 20 }}>
@@ -66,17 +66,14 @@ class DashboardView extends Component<IDispatchProps, IState> {
               </Card>
             </Row>
           </Col>
-        </Container>
+        </div>
         {this._handleDetailView()}
-      </Container>
+      </div>
     );
   }
 
   _handleDetailView = () => {
-    const {
-      selectedRow,
-      dashboard: { selectedContract }
-    } = this.props;
+    const { selectedRow } = this.props;
 
     if (isMobile) {
       return (
@@ -88,9 +85,11 @@ class DashboardView extends Component<IDispatchProps, IState> {
       );
     }
     return (
-      <Card className={`align-self-center ${styles.sidePanelWrapper}`}>
-        <SidePanel data={selectedRow} isOpen={true} />
-      </Card>
+      <div className="d-flex align-content-center flex-wrap">
+        <Card className={`align-self-center ${styles.sidePanelWrapper}`}>
+          <SidePanel data={selectedRow} isOpen={true} />
+        </Card>
+      </div>
     );
   };
 
