@@ -16,9 +16,6 @@ export default class SidePanelContainer extends Component<IProps> {
           <div className="flex-grow-2">
             <TxDetails txData={data} />
           </div>
-          <div className="flex-grow-1" style={{ height: 300 }}>
-            <h4>C</h4>
-          </div>
         </div>
       </Nav>
     );

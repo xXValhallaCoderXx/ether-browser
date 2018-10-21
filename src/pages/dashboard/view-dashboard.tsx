@@ -88,9 +88,9 @@ class DashboardView extends Component<IDispatchProps, IState> {
       );
     }
     return (
-      <Container className={styles.sidePanelWrapper}>
+      <Card className={`align-self-center ${styles.sidePanelWrapper}`}>
         <SidePanel data={selectedRow} isOpen={true} />
-      </Container>
+      </Card>
     );
   };
 
