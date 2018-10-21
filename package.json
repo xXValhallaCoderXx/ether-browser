@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --env.target development --config ./webpack-config/index.js",
-    "build": "webpack --env.target production --config ./webpack-config/index.js"
+    "build": "webpack --env.target production --config ./webpack-config/index.js",
+    "serve": "pm2 start server.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",

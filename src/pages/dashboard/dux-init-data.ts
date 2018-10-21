@@ -24,9 +24,6 @@ export interface InitDashbardState {
     msg?: string;
   };
 }
-// export const setEtheremContract = (contractID: string): Actions => {
-//   return { type: "@@HOME/ETHEREUM_CONTRACT", payload: contractID };
-// };
 
 export type DashboardActions =
   | { type: "@@DASHBOARD/ETHER_BALANCE_FETCHING"; payload: any }
