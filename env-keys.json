@@ -1,0 +1,8 @@
+{
+  "production": {
+    "ETHER_SCAN": "85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS"
+  },
+  "development": {
+    "ETHER_SCAN": "85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS"
+  }
+}

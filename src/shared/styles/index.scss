@@ -1,0 +1,17 @@
+html, 
+body {
+    height: 100%;
+    width: 100%;
+}
+
+#render-app {
+    height: 100%;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+
+$primary: #24BFD2;
+$secondary: #002333;
+
+@import "vendors/bootstrap/bootstrap.scss";

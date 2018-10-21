@@ -1,0 +1,26 @@
+.bgWrapper {
+  height: 100%;
+  padding: 0px;
+  background-image: linear-gradient(black, #24bfd2);
+  overflow: hidden;
+}
+
+.contentWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cardWrapper {
+  min-width: 320px;
+  width: 40%;
+}
+
+@media (max-width: 360px) { 
+  .cardWrapper {
+    width: 300px;
+  }
+ }
