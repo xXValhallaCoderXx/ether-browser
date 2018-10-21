@@ -70,8 +70,6 @@ export default class DataTable extends Component<IProps, IState> {
         }}
         className="-striped -highlight"
         getTrProps={(state: any, rowInfo: any) => {
-          console.log("CHECKING ROW: ", rowInfo)
-          //const {isError} = rowInfo.original;
           if (rowInfo && rowInfo.row) {
             const {isError} = rowInfo.original;
             return {
@@ -86,10 +84,6 @@ export default class DataTable extends Component<IProps, IState> {
               },
               style: {
                 backgroundColor: this._handleRowBackground(isError, rowInfo.index),
-                //border : isError === "1" ? "1px solid red" : null,
-                //backgroundColor: isError === "1" ? "rgba(255,0,0,0.3)" : null,
-                // background:
-                //   rowInfo.index === this.state.selected ? "#24bfd2" : "white",
                 color: rowInfo.index === this.state.selected ? "white" : "black"
               }
             };

@@ -1,11 +1,7 @@
 import React, { Fragment } from "react";
-import {
-  UncontrolledTooltip,
-  Input,
-  InputGroup,
-  InputGroupAddon
-} from "reactstrap";
+import { Input, InputGroup, InputGroupAddon } from "reactstrap";
 import { ITxData } from "shared/types";
+const styles = require("./styles.module.scss");
 
 interface IProps {
   txData: ITxData;
@@ -13,10 +9,15 @@ interface IProps {
 
 const TxDetails: React.SFC<IProps> = ({ txData }) => {
   return (
-    <div style={{ height: 430, width: 330, padding: 10 }}>
+    <div className={handleClassname()}>
       {_handleContent()}
     </div>
   );
+
+  function handleClassname(){
+    if(txData) return `${styles.txDetailsClicked} ${styles.txDetails}`
+    return styles.txDetails
+  }
 
   function _handleContent() {
     if (txData) {
@@ -131,7 +132,9 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
-                value={txData.source === null ? txData.destination : txData.source}
+                value={
+                  txData.source === null ? txData.destination : txData.source
+                }
                 disabled
               />
             </InputGroup>
@@ -144,7 +147,7 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
         className="d-flex justify-content-center align-items-center flex-column"
         style={{ height: "100%" }}
       >
-        <h2 className="text-primary" style={{ marginBottom: 20 }}>
+        <h2 className="text-primary">
           Select a Tx
         </h2>
         <h2 className="text-primary" style={{ marginTop: 20 }}>

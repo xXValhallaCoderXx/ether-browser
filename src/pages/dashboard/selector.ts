@@ -29,8 +29,6 @@ export const selectedRow = createSelector([txData, dashboardData], (data: any, d
   if(dashData.selectedRow === null){
     return null;
   }
-  console.log("HHMHMHM: ", data)
-  console.log("chdhheh: ", dashData)
   const {date, confirmations, ether, txHash, to, from, isError, gasUsed, gasPrice, fiatValue} = dashData.selectedRow;
   const {selectedCurrency} = dashData;
 
@@ -38,7 +36,6 @@ export const selectedRow = createSelector([txData, dashboardData], (data: any, d
   const convertedEth = unit.fromWei(gasUsed * gasPrice, 'ether');
   
   const txType = selectedContract.toLowerCase() == to.toLowerCase() ? "Recieved" : "Sent";
-  console.log("THE SELECTED ROW", dashData.selectedRow);
   let sidePanelData = {
     txEtherFiat: fiatValue,
     value: ether,

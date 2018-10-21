@@ -44,7 +44,6 @@ class DashboardView extends Component<IDispatchProps, IState> {
     if (status.loading) {
       return <LoadingView />;
     }
-    console.log("CHECKING PROPS: ", this.props);
     return (
       <div className={`d-flex flex-row justify-content-center ${styles.appLayoutWrapper}`}>
         <NavBar
