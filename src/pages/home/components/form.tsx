@@ -9,6 +9,7 @@ import {
   FormFeedback,
   Col
 } from "reactstrap";
+import {Loader} from "shared/components";
 const styles = require("./styles.module.scss");
 
 interface IProps {
@@ -40,16 +41,16 @@ export default class HomeForm extends Component<IProps, IState> {
             value={this.state.value}
             onChange={this._handleOnChange}
           />
-          <FormText color="muted">
+          <FormText color="muted" className={styles.formLabel}>
             Please enter the Ethereum contract you wish to view
           </FormText>
           <FormFeedback>{msg}</FormFeedback>
           {loading ? (
             <Col className={styles.loadingWrapper}>
-              <div className={styles.loading}>Loading</div>
+              <Loader />
             </Col>
           ) : (
-            <Button className={styles.btnStyles} type="submit" block>
+            <Button color="secondary" type="submit" block style={{marginTop: 10, marginBottom: -10}}>
               ENTER
             </Button>
           )}

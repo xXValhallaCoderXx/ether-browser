@@ -13,6 +13,7 @@ import {
   DropdownItem
 } from "reactstrap";
 import { Route, Switch } from "react-router-dom";
+const styles = require("./styles.module.scss");
 
 interface IState {
   isOpen: boolean;
@@ -20,7 +21,7 @@ interface IState {
 }
 
 interface IProps {
-  handleChangeCurrency: (currency: string) => void;
+  handleChangeCurrency?: (currency: string) => void;
 }
 
 export default class index extends Component<IProps, IState> {
@@ -30,7 +31,7 @@ export default class index extends Component<IProps, IState> {
   };
   render() {
     return (
-      <Navbar color="light" light expand="md">
+      <Navbar fixed="top" color="light" expand="md" style={{ borderBottom: "2px solid black"}}>
         <NavbarBrand href="/">Tx Browser</NavbarBrand>
         <NavbarToggler onClick={this._toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -44,6 +45,9 @@ export default class index extends Component<IProps, IState> {
               {/* If user is on Dashboard page - Display other Navlinks */}
               <Route exact path="/dashboard">
                 <Fragment>
+                  <div className={styles.selectCurrencyWrapper}>
+                    Select Currency
+                  </div>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                       {this.state.selectedItem}
@@ -67,8 +71,10 @@ export default class index extends Component<IProps, IState> {
     );
   }
   _setValue = (e: any) => {
-    this.props.handleChangeCurrency(e.target.value);
-    this.setState({ selectedItem: e.target.value})
+    if(this.props.handleChangeCurrency){
+      this.props.handleChangeCurrency(e.target.value);
+      this.setState({ selectedItem: e.target.value})
+    }
   };
   _toggle = () => this.setState({ isOpen: !this.state.isOpen });
 }

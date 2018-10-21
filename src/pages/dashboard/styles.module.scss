@@ -3,4 +3,39 @@
   flex-direction: row;
   padding: 0px;
   height: 100%;
+  background-image: linear-gradient(black, #24bfd2);
+}
+
+.contentViewWrapper {
+  margin-top: 100px;
+}
+
+.datagridWrapper {
+  margin-top: 50px;
+}
+
+@media (max-width: 639px) {
+  .sidePanelWrapper {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .contentViewWrapper {
+    flex: 8;
+  }
+
+  .sidePanelWrapper {
+    flex: 2;
+  }
+}
+
+@media (min-width: 1200px) {
+  .contentViewWrapper {
+    flex: 7;
+  }
+
+  .sidePanelWrapper {
+    flex: 3;
+  }
 }
