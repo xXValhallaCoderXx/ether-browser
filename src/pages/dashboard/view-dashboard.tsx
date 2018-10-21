@@ -86,7 +86,7 @@ class DashboardView extends Component<IDispatchProps, IState> {
     return (
       <div className="d-flex align-content-center flex-wrap">
         <Card className={`align-self-center ${styles.sidePanelWrapper}`}>
-          <SidePanel data={selectedRow} isOpen={true} />
+          <SidePanel txData={selectedRow} />
         </Card>
       </div>
     );

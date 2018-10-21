@@ -1,19 +1,14 @@
 import React, { Fragment } from "react";
 import { UncontrolledTooltip } from "reactstrap";
-const styles = require("./styles.module.scss");
 
 interface IProps {
   txData: any;
 }
 
 const TxDetails: React.SFC<IProps> = ({ txData }) => {
-
-  return <div className={handleClassname()}>{_handleContent()}</div>;
-
-  function handleClassname(){
-    if(txData) return `${styles.txDetailsClicked} ${styles.txDetails}`
-    return styles.txDetails
-  }
+  return (
+    <div className="d-flex flex-column flex-grow-1">{_handleContent()}</div>
+  );
 
   function _handleContent() {
     if (txData) {
@@ -47,7 +42,7 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
         </Fragment>
       );
     }
-    return <span>Click on a TX for more details</span>;
+    return <Fragment>Click on a TX for more details</Fragment>;
   }
 };
 
