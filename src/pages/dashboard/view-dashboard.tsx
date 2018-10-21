@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Col, Card, Row } from "reactstrap";
+import { Col, Card, Row } from "reactstrap";
 import { NavBar, LoadingView } from "shared/components";
 import { DataTable, SidePanel, ContractInfo, TxModal } from "./components";
 import { isMobile } from "react-device-detect";
@@ -56,7 +56,7 @@ class DashboardView extends Component<IDispatchProps, IState> {
               </Card>
             </Row>
             <Row className={styles.datagridWrapper}>
-              <Card style={{ padding: 20, width: "100%" }}>
+              <Card style={{ padding: 10, width: "100%" }}>
                 <DataTable
                   toggle={this._handleToggle}
                   height={this.state.tableHeight}
@@ -86,7 +86,7 @@ class DashboardView extends Component<IDispatchProps, IState> {
     return (
       <div className="d-flex align-content-center flex-wrap">
         <Card className={`align-self-center ${styles.sidePanelWrapper}`}>
-          <SidePanel data={selectedRow} isOpen={true} />
+          <SidePanel txData={selectedRow} />
         </Card>
       </div>
     );

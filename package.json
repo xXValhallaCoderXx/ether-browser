@@ -36,6 +36,7 @@
     "mini-css-extract-plugin": "^0.4.3",
     "node-sass": "^4.9.3",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "pm2": "^3.2.2",
     "postcss-loader": "^3.0.0",
     "postcss-safe-parser": "^4.0.1",
     "react-hot-loader": "^4.3.11",

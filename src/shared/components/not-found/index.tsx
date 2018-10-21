@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Loader } from "shared/components";
 const styles = require("./styles.module.scss");
 
 export default class LoadingView extends Component {
@@ -9,11 +8,10 @@ export default class LoadingView extends Component {
         className="d-flex justify-content-center align-items-center flex-column"
         style={{ padding: 10, height: "100%" }}
       >
-        <div className={styles.loadingWrapper}>
-          <p className={styles.loadingText}>
-            Crypto Gremlins Hard At Work...
+        <div className={styles.notFoundWrapper}>
+          <p className={styles.notFoundText}>
+            Uh Oh! Page Not Found...
           </p>
-          <Loader />
         </div>
       </div>
     );

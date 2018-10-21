@@ -5,8 +5,6 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -47,20 +45,15 @@ export default class index extends Component<IProps, IState> {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <Switch>
-              <Route exact path="/">
-                <NavItem>
-                  <NavLink href="/components/">About</NavLink>
-                </NavItem>
-              </Route>
               {/* If user is on Dashboard page - Display other Navlinks */}
               <Route exact path="/dashboard">
                 {/* <MobileView> */}
                   <Fragment>
                     <div className={styles.selectCurrencyWrapper}>
-                      Select Currency
+                      SELECT CURRENCY
                     </div>
                     <UncontrolledDropdown nav inNavbar>
-                      <DropdownToggle nav caret>
+                      <DropdownToggle nav caret className="text-primary">
                         {this.state.selectedItem}
                       </DropdownToggle>
                       <DropdownMenu right>
