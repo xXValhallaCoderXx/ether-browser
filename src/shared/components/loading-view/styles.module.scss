@@ -1,8 +1,13 @@
-.loaderViewWrapper {
-  height: 100%;
-  width: 100%;
+.loadingWrapper {
+  max-width: 400px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.loadingText {
+  font-size: 2rem;
+  text-align: center;
 }
