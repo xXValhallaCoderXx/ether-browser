@@ -13,5 +13,5 @@ app.get('*', function (req, res) {
 })
 
 app.listen(3000, function () {
-  console.log('Crypto Gremlines Singing on: 3000')
+  console.log('Crypto Gremlins Singing on: 3000')
 })
