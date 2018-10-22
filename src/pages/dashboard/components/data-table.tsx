@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { convertUnix } from "shared/utils";
 import { isMobile } from "react-device-detect";
-import unit from "ethjs-unit";
+import { Badge } from "reactstrap";
 
 interface IProps {
   data: any;
@@ -29,7 +28,7 @@ export default class DataTable extends Component<IProps, IState> {
         columns={[
           {
             Header: "TxHash",
-            accessor: "hash"
+            accessor: "txHash"
           },
           {
             Header: "From",
@@ -40,25 +39,27 @@ export default class DataTable extends Component<IProps, IState> {
             accessor: "to"
           },
           {
-            id: "timeStamp",
-            Header: "Date",
-            accessor: (d: any) => {
-              return convertUnix(d.timeStamp);
-            }
+            accessor: "date",
+            Header: "Date"
           },
           {
-            id: "value",
-            Header: "Value",
-            accessor: (d: any) => {
-              return unit.fromWei(d.gasUsed * d.gasPrice, "ether");
-            }
+            accessor: "ether",
+            Header: "Ether"
           },
           {
-            id: "value",
-            Header: "Fiat Value",
-            accessor: (d: any) => {
-              return unit.fromWei(d.gasUsed * d.gasPrice, "ether");
-            }
+            accessor: "fiatValue",
+            Header: "Fiat Value"
+          },
+          {
+            accessor: "type",
+            Header: "Type",
+            Cell: row => (
+              <span className="d-flex justify-content-center align-items-center">
+                <Badge color={row.value === "IN" ? "success" : "warning"}>
+                  {row.value === "IN" ? "IN" : "OUT"}
+                </Badge>
+              </span>
+            )
           }
         ]}
         defaultPageSize={20}
@@ -70,7 +71,7 @@ export default class DataTable extends Component<IProps, IState> {
         className="-striped -highlight"
         getTrProps={(state: any, rowInfo: any) => {
           if (rowInfo && rowInfo.row) {
-
+            const {isError} = rowInfo.original;
             return {
               onClick: (e: any) => {
                 this.setState({
@@ -82,8 +83,7 @@ export default class DataTable extends Component<IProps, IState> {
                 }
               },
               style: {
-                background:
-                  rowInfo.index === this.state.selected ? "#24bfd2" : "white",
+                backgroundColor: this._handleRowBackground(isError, rowInfo.index),
                 color: rowInfo.index === this.state.selected ? "white" : "black"
               }
             };
@@ -93,5 +93,17 @@ export default class DataTable extends Component<IProps, IState> {
         }}
       />
     );
+  }
+
+  _handleRowBackground = (isError: any, rowIndex: any) => {
+    if(isError !== "1" && rowIndex === this.state.selected){
+      return "#24bfd2"
+    }else if (isError === "1" && rowIndex !== this.state.selected){
+      return "rgba(255,0,0,0.3)"
+    }else if(isError === "1" && rowIndex === this.state.selected){
+      return "#24bfd2"
+    }else {
+      return "white"
+    }
   }
 }

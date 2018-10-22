@@ -19,7 +19,6 @@ productionConfig = app =>
     }),
     {
       output: {
-        publicPath: "/", // Need this if you got Source maps on for Images to load
         filename: "[name].[chunkhash:8].js",
         chunkFilename: "static/js/[name].[chunkhash:8].js"
       },

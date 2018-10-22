@@ -1,0 +1,10 @@
+.txDetails {
+  width: 330px;
+  min-height: 30px;
+  transition: min-height 0.3s ease-out;
+  overflow: hidden;
+  padding: 10px;
+}
+ .txDetailsClicked {
+  min-height: 200px;
+} 

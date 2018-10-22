@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import { Col } from "reactstrap";
 import { Input, InputGroup, InputGroupAddon } from "reactstrap";
+import {IOverviewData} from "shared/types";
 
 interface IProps {
-  overViewData: any;
+  overViewData: IOverviewData;
 }
 
-interface IState {
-  isOpen: boolean;
-}
-export default class ContractInfo extends Component<IProps, IState> {
-  state = {
-    isOpen: false
-  };
+export default class ContractInfo extends Component<IProps, {}> {
+
   render() {
     const { contractID, etherBalance, etherFiat } = this.props.overViewData;
 
@@ -68,5 +64,4 @@ export default class ContractInfo extends Component<IProps, IState> {
       </div>
     );
   }
-  toggle = () => this.setState({ isOpen: !this.state.isOpen });
 }

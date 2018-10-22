@@ -12,11 +12,15 @@ commonConfig = app =>
       entry: {
         app: PATHS.app
       },
+      output: {
+        publicPath: "/", // Need this if you got Source maps on for Images to load
+      },
       plugins: [
         //new BundleAnalyzerPlugin(),
         new HtmlWebpackPlugin({
           title: "Webpack demo",
-          template: path.resolve(__dirname, "../src/index.html")
+          template: path.resolve(__dirname, "../src/index.html"),
+          favicon: path.resolve(__dirname, "../src/shared/images/ether-logo.png")
         }),
         new webpack.NamedModulesPlugin()
       ],
