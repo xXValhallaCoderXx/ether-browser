@@ -22,6 +22,7 @@ export default class DataTable extends Component<IProps, IState> {
 
   render() {
     const { data } = this.props;
+    console.log("WHAT THIS DATA: ", data);
     return (
       <ReactTable
         data={data}
@@ -43,7 +44,8 @@ export default class DataTable extends Component<IProps, IState> {
             Header: "Date"
           },
           {
-            accessor: "ether",
+            id: "ether",
+            accessor: (d: any)=>Number(d.ether),
             Header: "Ether"
           },
           {
