@@ -34,8 +34,11 @@ class DashboardView extends Component<IDispatchProps, IState> {
    
   }
   async componentDidMount() {
+    // Add event listener for handling table size
     window.addEventListener("resize", this._contentViewHeight);
-    if(this.props.match.params.address){
+    // If link directly to the contract fetch its data
+    // If coming from the root page - Skip
+    if(this.props.match.params.address && this.props.overViewData === null){
       await this.props.fetchContractData(this.props.match.params.address)
     }
     // Fetch required data based off Public key Contract ID
@@ -54,6 +57,7 @@ class DashboardView extends Component<IDispatchProps, IState> {
       return <NotFoundComponent />
     }
 
+    // Tempt Fix - Should be handled via Redux
     let currencySymbol = "$";
     if(this.props.overViewData !== null){
       currencySymbol = this.props.overViewData.currencySymbol;

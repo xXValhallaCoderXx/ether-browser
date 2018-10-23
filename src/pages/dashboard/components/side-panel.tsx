@@ -23,7 +23,7 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
     if (txData) {
       return (
         <Fragment>
-          <h4 className="text-primary">Transaction Info</h4>
+          <h4 style={{marginLeft: 5}} className="text-primary">Transaction Info</h4>
           <div style={{ padding: 10 }}>
             <InputGroup style={{ marginBottom: 10 }}>
               <InputGroupAddon addonType="prepend" style={{ height: 31 }}>
@@ -148,10 +148,7 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
         style={{ height: "100%" }}
       >
         <h2 className="text-primary">
-          Select a Tx
-        </h2>
-        <h2 className="text-primary" style={{ marginTop: 10 }}>
-          For more info
+          Select Transaction
         </h2>
       </div>
     );
