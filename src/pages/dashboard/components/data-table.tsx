@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import { isMobile } from "react-device-detect";
+import { convertUnix } from "shared/utils";
 import { Badge } from "reactstrap";
 
 interface IProps {
@@ -40,15 +41,25 @@ export default class DataTable extends Component<IProps, IState> {
             accessor: "to"
           },
           {
-            accessor: "date",
-            Header: "Date"
+            id: "date",
+            accessor: (d: any) => d.date.original,
+            Header: "Date",
+            Cell: row => {
+              console.log("ROW VAL: ", row.value);
+              return (
+                <span>
+                  {convertUnix(row.value)}
+                </span>
+              );
+            }
           },
           {
             id: "ether",
-            accessor: (d: any)=>Number(d.ether),
+            accessor: (d: any) => Number(d.ether),
             Header: "Ether"
           },
           {
+            id: "fiatValue",
             accessor: "fiatValue",
             Header: "Fiat Value"
           },
@@ -73,7 +84,7 @@ export default class DataTable extends Component<IProps, IState> {
         className="-striped -highlight"
         getTrProps={(state: any, rowInfo: any) => {
           if (rowInfo && rowInfo.row) {
-            const {isError} = rowInfo.original;
+            const { isError } = rowInfo.original;
             return {
               onClick: (e: any) => {
                 this.setState({
@@ -85,7 +96,10 @@ export default class DataTable extends Component<IProps, IState> {
                 }
               },
               style: {
-                backgroundColor: this._handleRowBackground(isError, rowInfo.index),
+                backgroundColor: this._handleRowBackground(
+                  isError,
+                  rowInfo.index
+                ),
                 color: rowInfo.index === this.state.selected ? "white" : "black"
               }
             };
@@ -98,14 +112,14 @@ export default class DataTable extends Component<IProps, IState> {
   }
 
   _handleRowBackground = (isError: any, rowIndex: any) => {
-    if(isError !== "1" && rowIndex === this.state.selected){
-      return "#24bfd2"
-    }else if (isError === "1" && rowIndex !== this.state.selected){
-      return "rgba(255,0,0,0.3)"
-    }else if(isError === "1" && rowIndex === this.state.selected){
-      return "#24bfd2"
-    }else {
-      return "white"
+    if (isError !== "1" && rowIndex === this.state.selected) {
+      return "#24bfd2";
+    } else if (isError === "1" && rowIndex !== this.state.selected) {
+      return "rgba(255,0,0,0.3)";
+    } else if (isError === "1" && rowIndex === this.state.selected) {
+      return "#24bfd2";
+    } else {
+      return "white";
     }
-  }
+  };
 }

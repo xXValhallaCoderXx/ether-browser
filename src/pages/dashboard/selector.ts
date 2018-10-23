@@ -105,7 +105,10 @@ export const tableData = createSelector(
           isError: tx.isError,
           from: tx.from,
           to: tx.to,
-          date: convertUnix(tx.timeStamp),
+          date: {
+            original: tx.timeStamp,
+            parsed: convertUnix(tx.timeStamp)
+          },
           ether: etherValue,
           fiatValue: currencyFormat(selectedCurrency).format(
             etherRates[selectedCurrency] * etherValue
