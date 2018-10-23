@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
 import { IRootState } from "store/rootReducer";
-import { currencyFormat } from "./dashboard-utils";
-import { currenySymbol } from "./dashboard-utils";
+import { currencyFormat, currenySymbol } from "./dashboard-utils";
 import { convertUnix } from "shared/utils";
 import unit from "ethjs-unit";
 
@@ -112,9 +111,7 @@ export const tableData = createSelector(
           },
           ether: etherValue,
           fiatValue: {
-            original: currencyFormat(selectedCurrency).format(
-              etherRates[selectedCurrency] * etherValue
-            ),
+            original: etherValue,
             parsed: currencyFormat(selectedCurrency).format(
               etherRates[selectedCurrency] * etherValue
             )

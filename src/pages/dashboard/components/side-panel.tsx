@@ -150,8 +150,8 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
         <h2 className="text-primary">
           Select a Tx
         </h2>
-        <h2 className="text-primary" style={{ marginTop: 20 }}>
-          For more info...
+        <h2 className="text-primary" style={{ marginTop: 10 }}>
+          For more info
         </h2>
       </div>
     );

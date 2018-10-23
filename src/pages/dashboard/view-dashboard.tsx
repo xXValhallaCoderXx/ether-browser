@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Card, Row } from "reactstrap";
-import { NavBar, LoadingView } from "shared/components";
+import { NavBar, LoadingView, NotFoundComponent } from "shared/components";
 import { DataTable, SidePanel, ContractInfo, TxModal } from "./components";
 import { isMobile } from "react-device-detect";
 const styles = require("./styles.module.scss");
@@ -38,22 +38,25 @@ class DashboardView extends Component<IDispatchProps, IState> {
     if(this.props.match.params.address){
       await this.props.fetchContractData(this.props.match.params.address)
     }
-    // Fetch required data based off Publioc key Contract ID
+    // Fetch required data based off Public key Contract ID
     const { selectedContract } = this.props.dashboard;
     await this.props.fetchEtherBalance(selectedContract);
     await this.props.fetchEtherRates();
     this._contentViewHeight();
   }
   render() {
-    let currencySymbol = "$";
-    if(this.props.overViewData !== null){
-      currencySymbol = this.props.overViewData.currencySymbol;
-    }
-    console.log("WHAT HAPPENING: ", this.props);
     const { selectedContract, status } = this.props.dashboard;
 
     if (status.loading || selectedContract === null) {
       return <LoadingView />;
+    }
+    if(status.error){
+      return <NotFoundComponent />
+    }
+
+    let currencySymbol = "$";
+    if(this.props.overViewData !== null){
+      currencySymbol = this.props.overViewData.currencySymbol;
     }
     return (
       <div className={`d-flex flex-row justify-content-center ${styles.appLayoutWrapper}`}>
