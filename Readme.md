@@ -27,7 +27,12 @@ This is a Ethereum Public Smart Contract Transaction browser built on the follow
 - Run `npm i` or `yarn` in the root to install deps
 - Run `npm run build` or `yarn build` to build project locally
 - Run `npm run serve:local` or `yarn serve:local` to start application, it will be on `localhost:3000`
-- Enter your Public contract ID in the input provided, or you may also go via the `url` by typing `localhost:3000/dashboard/:someID`
+- Enter your Public contract ID in the input provided, or you may also go via the `url` by typing `localhost:3000/address/:someID`
 
 ### Hosted
 - The hosted project can be found on: `http://128.199.247.201:3000`
+
+### Known Bugs
+
+- Sorting working fine for the Date and Ether value, was not able to finish Fiat Value sorting
+- You can access a smart contract directly via the URL as `localhost:3000/address/:someID` but incorrect ID isnt handled yet - It will show constant loading screen

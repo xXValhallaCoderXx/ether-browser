@@ -4,7 +4,7 @@ import { ITxData } from "shared/types";
 const styles = require("./styles.module.scss");
 
 interface IProps {
-  txData: ITxData;
+  txData: any;
 }
 
 const TxDetails: React.SFC<IProps> = ({ txData }) => {
@@ -57,7 +57,7 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
-                value={txData.txEtherFiat}
+                value={txData.txEtherFiat.parsed}
                 disabled
               />
             </InputGroup>
@@ -81,7 +81,7 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
-                value={txData.date}
+                value={txData.date.parsed}
                 disabled
               />
             </InputGroup>
@@ -150,8 +150,8 @@ const TxDetails: React.SFC<IProps> = ({ txData }) => {
         <h2 className="text-primary">
           Select a Tx
         </h2>
-        <h2 className="text-primary" style={{ marginTop: 20 }}>
-          For more info...
+        <h2 className="text-primary" style={{ marginTop: 10 }}>
+          For more info
         </h2>
       </div>
     );

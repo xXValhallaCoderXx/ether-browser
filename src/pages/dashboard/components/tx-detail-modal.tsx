@@ -12,7 +12,7 @@ import {
 import {ITxData} from "shared/types";
 
 interface IProps {
-  txData: ITxData;
+  txData: any;
   toggle: () => void;
   isOpen: boolean;
 }
@@ -58,7 +58,7 @@ const SelectedFileView: React.SFC<IProps> = ({ txData, toggle, isOpen }) => {
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
-                value={txData.txEtherFiat}
+                value={txData.txEtherFiat.parsed}
                 disabled
               />
             </InputGroup>
@@ -82,7 +82,7 @@ const SelectedFileView: React.SFC<IProps> = ({ txData, toggle, isOpen }) => {
                 bsSize="sm"
                 style={{ backgroundColor: "white" }}
                 type="text"
-                value={txData.date}
+                value={txData.date.parsed}
                 disabled
               />
             </InputGroup>

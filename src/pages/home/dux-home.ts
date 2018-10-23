@@ -44,7 +44,7 @@ export const fetchContractData = (contractID: string): ThunkType => {
         // Parse result to store by ID
         const result = await parseResult(contractID, data.result);
         dispatch({ type: "@@HOME/CONTRACT_DATA_SUCCESS", payload: result });
-        history.push("/dashboard")
+        history.push(`/address/${contractID}`)
       }
     } catch (e) {
       dispatch({
