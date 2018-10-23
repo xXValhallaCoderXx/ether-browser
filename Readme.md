@@ -33,6 +33,6 @@ This is a Ethereum Public Smart Contract Transaction browser built on the follow
 - The hosted project can be found on: `http://128.199.247.201:3000`
 
 ### Known Bugs
-
+- All Tx are being pulled at once, didnt realize how many some over smart contract had, if knew this earlier would have implemented an incremental pagination to get data from the API on demand, rather than all at once
 - Sorting working fine for the Date and Ether value, was not able to finish Fiat Value sorting
 - You can access a smart contract directly via the URL as `localhost:3000/address/:someID` but incorrect ID isnt handled yet - It will show constant loading screen
