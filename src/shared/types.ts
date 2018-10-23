@@ -3,7 +3,10 @@ export interface ITxData {
   value: string;
   txEtherFiat: string;
   fiat: string;
-  date: string;
+  date: {
+    original: string;
+    parsed: string;
+  };
   type: string;
   status: string;
   confirmations: string;

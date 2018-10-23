@@ -10,6 +10,7 @@ interface IProps {
   selectRow: (data: any) => void;
   height: any;
   toggle: () => void;
+  currencySymbol: string;
 }
 
 interface IState {
@@ -23,7 +24,6 @@ export default class DataTable extends Component<IProps, IState> {
 
   render() {
     const { data } = this.props;
-    console.log("WHAT THIS DATA: ", data);
     return (
       <ReactTable
         data={data}
@@ -45,7 +45,6 @@ export default class DataTable extends Component<IProps, IState> {
             accessor: (d: any) => d.date.original,
             Header: "Date",
             Cell: row => {
-              console.log("ROW VAL: ", row.value);
               return (
                 <span>
                   {convertUnix(row.value)}
@@ -60,7 +59,7 @@ export default class DataTable extends Component<IProps, IState> {
           },
           {
             id: "fiatValue",
-            accessor: "fiatValue",
+            accessor: (d: any) => d.fiatValue.parsed,
             Header: "Fiat Value"
           },
           {

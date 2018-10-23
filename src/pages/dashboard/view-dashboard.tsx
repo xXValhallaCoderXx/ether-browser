@@ -45,7 +45,12 @@ class DashboardView extends Component<IDispatchProps, IState> {
     this._contentViewHeight();
   }
   render() {
-    const { selectedContract, contractData, status } = this.props.dashboard;
+    let currencySymbol = "$";
+    if(this.props.overViewData !== null){
+      currencySymbol = this.props.overViewData.currencySymbol;
+    }
+    console.log("WHAT HAPPENING: ", this.props);
+    const { selectedContract, status } = this.props.dashboard;
 
     if (status.loading || selectedContract === null) {
       return <LoadingView />;
@@ -65,6 +70,7 @@ class DashboardView extends Component<IDispatchProps, IState> {
             <Row className={styles.datagridWrapper}>
               <Card style={{ padding: 10, width: "100%" }}>
                 <DataTable
+                  currencySymbol={currencySymbol}
                   toggle={this._handleToggle}
                   height={this.state.tableHeight}
                   selectRow={this.props.selectRow}

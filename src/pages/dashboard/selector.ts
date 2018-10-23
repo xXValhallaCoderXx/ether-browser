@@ -97,6 +97,7 @@ export const tableData = createSelector(
         const txType =
           selectedContract.toLowerCase() == tx.to.toLowerCase() ? "IN" : "OUT";
         const etherValue = unit.fromWei(tx.value, "ether");
+
         return {
           confirmations: tx.confirmations,
           gasUsed: tx.gasUsed,
@@ -110,9 +111,14 @@ export const tableData = createSelector(
             parsed: convertUnix(tx.timeStamp)
           },
           ether: etherValue,
-          fiatValue: currencyFormat(selectedCurrency).format(
-            etherRates[selectedCurrency] * etherValue
-          ),
+          fiatValue: {
+            original: currencyFormat(selectedCurrency).format(
+              etherRates[selectedCurrency] * etherValue
+            ),
+            parsed: currencyFormat(selectedCurrency).format(
+              etherRates[selectedCurrency] * etherValue
+            )
+          },
           type: txType
         };
       });
