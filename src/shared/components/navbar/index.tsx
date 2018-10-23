@@ -46,7 +46,7 @@ export default class index extends Component<IProps, IState> {
           <Nav className="ml-auto" navbar>
             <Switch>
               {/* If user is on Dashboard page - Display other Navlinks */}
-              <Route exact path="/dashboard">
+              <Route exact path="/address/:address">
                 {/* <MobileView> */}
                   <Fragment>
                     <div className={styles.selectCurrencyWrapper}>

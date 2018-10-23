@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
 import { IRootState } from "store/rootReducer";
-import { currencyFormat } from "./dashboard-utils";
-import { currenySymbol } from "./dashboard-utils";
+import { currencyFormat, currenySymbol } from "./dashboard-utils";
 import { convertUnix } from "shared/utils";
 import unit from "ethjs-unit";
 
@@ -97,6 +96,7 @@ export const tableData = createSelector(
         const txType =
           selectedContract.toLowerCase() == tx.to.toLowerCase() ? "IN" : "OUT";
         const etherValue = unit.fromWei(tx.value, "ether");
+
         return {
           confirmations: tx.confirmations,
           gasUsed: tx.gasUsed,
@@ -105,11 +105,17 @@ export const tableData = createSelector(
           isError: tx.isError,
           from: tx.from,
           to: tx.to,
-          date: convertUnix(tx.timeStamp),
+          date: {
+            original: tx.timeStamp,
+            parsed: convertUnix(tx.timeStamp)
+          },
           ether: etherValue,
-          fiatValue: currencyFormat(selectedCurrency).format(
-            etherRates[selectedCurrency] * etherValue
-          ),
+          fiatValue: {
+            original: etherValue,
+            parsed: currencyFormat(selectedCurrency).format(
+              etherRates[selectedCurrency] * etherValue
+            )
+          },
           type: txType
         };
       });
