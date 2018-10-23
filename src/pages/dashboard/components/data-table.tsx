@@ -4,6 +4,7 @@ import "react-table/react-table.css";
 import { isMobile } from "react-device-detect";
 import { convertUnix } from "shared/utils";
 import { Badge } from "reactstrap";
+const styles = require("./styles.module.scss");
 
 interface IProps {
   data: any;
@@ -29,21 +30,25 @@ export default class DataTable extends Component<IProps, IState> {
         data={data}
         columns={[
           {
-            Header: "TxHash",
-            accessor: "txHash"
+            Header: <span className={styles.headerStyles}>Tx Hash</span>,
+            accessor: "txHash",
+            width: 110
           },
           {
-            Header: "From",
-            accessor: "from"
+            Header: <span className={styles.headerStyles}>From</span>,
+            accessor: "from",
+            width: 110
           },
           {
-            Header: "To",
-            accessor: "to"
+            Header: <span className={styles.headerStyles}>To</span>,
+            accessor: "to",
+            width: 110
           },
           {
             id: "date",
+            width: 180,
             accessor: (d: any) => d.date.original,
-            Header: "Date",
+            Header: <span className={styles.headerStyles}>Date</span>,
             Cell: row => {
               return (
                 <span>
@@ -54,17 +59,20 @@ export default class DataTable extends Component<IProps, IState> {
           },
           {
             id: "ether",
+            width: 90,
             accessor: (d: any) => Number(d.ether),
-            Header: "Ether"
+            Header: <span className={styles.headerStyles}>Value</span>
           },
           {
             id: "fiatValue",
+            width: 90,
             accessor: (d: any) => d.fiatValue.parsed,
-            Header: "Fiat Value"
+            Header: <span className={styles.headerStyles}>Fiat</span>
           },
           {
             accessor: "type",
-            Header: "Type",
+            width: 100,
+            Header: <span className={styles.headerStyles}>Type</span>,
             Cell: row => (
               <span className="d-flex justify-content-center align-items-center">
                 <Badge color={row.value === "IN" ? "success" : "warning"}>
