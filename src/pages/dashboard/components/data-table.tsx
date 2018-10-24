@@ -24,6 +24,7 @@ export default class DataTable extends Component<IProps, IState> {
   };
 
   render() {
+    const windowWidth = window.innerWidth;
     const { data } = this.props;
     return (
       <ReactTable
@@ -104,7 +105,7 @@ export default class DataTable extends Component<IProps, IState> {
                   selected: rowInfo.index
                 });
                 this.props.selectRow(rowInfo.original);
-                if (isMobile) {
+                if (isMobile || windowWidth <= 639) {
                   this.props.toggle();
                 }
               },

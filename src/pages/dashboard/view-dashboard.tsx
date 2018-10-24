@@ -106,7 +106,8 @@ class DashboardView extends Component<IDispatchProps, IState> {
 
   _handleDetailView = () => {
     const { selectedRow } = this.props;
-    if (isMobile) {
+    const windowWidth = window.innerWidth;
+    if (isMobile || windowWidth <= 639) {
       return (
         <TxModal
           toggle={this._handleToggle}
