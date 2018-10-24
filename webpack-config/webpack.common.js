@@ -30,8 +30,6 @@ commonConfig = app =>
       }
     },
     parts.loadTypescript({ include: PATHS.app, exclude: PATHS.nodeModules }),
-    // Set Env Variable indivdually
-    parts.setFreeVariable("SOME_VAR", "This is from the freeee variables"),
     // Will read from env-vars.json and set Variables for Production/Development
     parts.setFreeVariables(config[app.target])
   ]);

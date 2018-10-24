@@ -34,7 +34,7 @@ productionConfig = app =>
     },
     parts.extractCSS({
       include: [PATHS.app, PATHS.reactTableCSS],
-      //exclude: PATHS.nodeModules
+      exclude: PATHS.nodeModules
     }),
     parts.loadImages({
       options: {

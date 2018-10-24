@@ -4,8 +4,20 @@ import { currencyFormat, currenySymbol } from "./dashboard-utils";
 import { convertUnix } from "shared/utils";
 import unit from "ethjs-unit";
 
+const addressApi = (state:IRootState) => state.home;
 const txData = (state: IRootState) => state.initDashboard;
 const dashboardData = (state: IRootState) => state.dashboard;
+
+export const loadingState = createSelector(
+  [txData, addressApi],
+  (data: any,  fetchingAddressStatus: any) => {
+    let apiStatus = {
+      addressApi: fetchingAddressStatus,
+      currencyApi: data.status
+    }
+    return apiStatus  ;
+  }
+);
 
 export const overViewData = createSelector(
   [txData, dashboardData],

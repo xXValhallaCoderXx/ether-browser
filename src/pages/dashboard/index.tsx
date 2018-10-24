@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { IRootState } from "store/rootReducer";
-import { overViewData, selectedRow, tableData } from "./selector";
+import { overViewData, selectedRow, tableData, loadingState } from "./selector";
 import { fetchEtherBalance, fetchEtherRates } from "./dux-init-data";
 import { setCurrency, selectRow } from "./dux-dashboard";
 import { fetchContractData } from "pages/home/dux-home";
@@ -13,7 +13,8 @@ const mapStateToProps = (state: IRootState) => {
     dashboard: state.initDashboard,
     overViewData: overViewData(state),
     selectedRow: selectedRow(state),
-    tableData: tableData(state)
+    tableData: tableData(state),
+    fetchingState: loadingState(state)
   };
 };
 

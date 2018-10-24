@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
-import "react-table/react-table.css";
+import "shared/styles/react-table.css";
 import { isMobile } from "react-device-detect";
 import { convertUnix } from "shared/utils";
 import { Badge } from "reactstrap";
@@ -24,6 +24,7 @@ export default class DataTable extends Component<IProps, IState> {
   };
 
   render() {
+    const windowWidth = window.innerWidth;
     const { data } = this.props;
     return (
       <ReactTable
@@ -83,6 +84,12 @@ export default class DataTable extends Component<IProps, IState> {
           }
         ]}
         defaultPageSize={20}
+        defaultSorted={[
+          {
+            id: "date",
+            desc: true
+          }
+        ]}
         style={{
           fontSize: 14,
           width: "100%",
@@ -98,7 +105,7 @@ export default class DataTable extends Component<IProps, IState> {
                   selected: rowInfo.index
                 });
                 this.props.selectRow(rowInfo.original);
-                if (isMobile) {
+                if (isMobile || windowWidth <= 639) {
                   this.props.toggle();
                 }
               },
