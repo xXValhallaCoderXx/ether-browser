@@ -6,6 +6,7 @@ import { isMobile } from "react-device-detect";
 const styles = require("./styles.module.scss");
 
 interface IDispatchProps {
+  fetchingState: any;
   dashboard: any;
   overViewData: any;
   selectedRow: any;
@@ -31,46 +32,57 @@ class DashboardView extends Component<IDispatchProps, IState> {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this._contentViewHeight);
-   
   }
   async componentDidMount() {
     // Add event listener for handling table size
     window.addEventListener("resize", this._contentViewHeight);
     // If link directly to the contract fetch its data
     // If coming from the root page - Skip
-    if(this.props.match.params.address && this.props.overViewData === null){
-      await this.props.fetchContractData(this.props.match.params.address)
+    if (this.props.match.params.address && this.props.overViewData === null) {
+      await this.props.fetchContractData(this.props.match.params.address);
     }
-    // Fetch required data based off Public key Contract ID
-    const { selectedContract } = this.props.dashboard;
-    await this.props.fetchEtherBalance(selectedContract);
-    await this.props.fetchEtherRates();
-    this._contentViewHeight();
+    const { addressApi } = this.props.fetchingState;
+    if (addressApi.success) {
+      // If Contact ID is valid - Fetch other data
+      const { selectedContract } = this.props.dashboard;
+      await this.props.fetchEtherBalance(selectedContract);
+      await this.props.fetchEtherRates();
+      this._contentViewHeight();
+    }
   }
   render() {
     const { selectedContract, status } = this.props.dashboard;
-
-    if (status.loading || selectedContract === null) {
-      return <LoadingView />;
+    const { addressApi, currencyApi } = this.props.fetchingState;
+    if (addressApi.error) {
+      return <NotFoundComponent msg={"Incorrect Address, please check the URL"} />;
     }
-    if(status.error){
-      return <NotFoundComponent />
+    // This should be handled in one thunk - TODO
+    if (addressApi.loading || currencyApi.loading || selectedContract === null) {
+      return <LoadingView />;
     }
 
     // Tempt Fix - Should be handled via Redux
     let currencySymbol = "$";
-    if(this.props.overViewData !== null){
+    if (this.props.overViewData !== null) {
       currencySymbol = this.props.overViewData.currencySymbol;
     }
     return (
-      <div className={`d-flex flex-row justify-content-center ${styles.appLayoutWrapper}`}>
+      <div
+        className={`d-flex flex-row justify-content-center ${
+          styles.appLayoutWrapper
+        }`}
+      >
         <NavBar
           handleChangeCurrency={(x: string) => this.props.setCurrency(x)}
         />
-        <div id="content-view" className={`flex-grow-1 ${styles.contentViewWrapper}`} style={{maxWidth: 1000}}>
-          <Col xs={{size: 10, offset: 1}}>
+        <div
+          id="content-view"
+          className={`flex-grow-1 ${styles.contentViewWrapper}`}
+          style={{ maxWidth: 1000 }}
+        >
+          <Col xs={{ size: 10, offset: 1 }}>
             <Row>
-              <Card style={{width: "100%"}}>
+              <Card style={{ width: "100%" }}>
                 <ContractInfo overViewData={this.props.overViewData} />
               </Card>
             </Row>
