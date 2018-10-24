@@ -16,7 +16,7 @@ commonConfig = app =>
         publicPath: "/", // Need this if you got Source maps on for Images to load
       },
       plugins: [
-        new BundleAnalyzerPlugin(),
+        //new BundleAnalyzerPlugin(),
         new HtmlWebpackPlugin({
           title: "Webpack demo",
           template: path.resolve(__dirname, "../src/index.html"),
