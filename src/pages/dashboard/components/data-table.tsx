@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
-import "react-table/react-table.css";
+import "shared/styles/react-table.css";
 import { isMobile } from "react-device-detect";
 import { convertUnix } from "shared/utils";
 import { Badge } from "reactstrap";

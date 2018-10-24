@@ -15,7 +15,7 @@ developmentConfig = app =>
     }),
     parts.developmentCSS({
       include: [PATHS.app, PATHS.reactTableCSS],
-      //exclude: PATHS.nodeModules
+      exclude: PATHS.nodeModules
     }),
     parts.loadImages()
   ]);
