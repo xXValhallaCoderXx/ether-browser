@@ -83,6 +83,12 @@ export default class DataTable extends Component<IProps, IState> {
           }
         ]}
         defaultPageSize={20}
+        defaultSorted={[
+          {
+            id: "date",
+            desc: true
+          }
+        ]}
         style={{
           fontSize: 14,
           width: "100%",
