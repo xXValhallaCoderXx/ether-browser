@@ -9,13 +9,13 @@ const txData = (state: IRootState) => state.initDashboard;
 const dashboardData = (state: IRootState) => state.dashboard;
 
 export const loadingState = createSelector(
-  [txData, dashboardData, addressApi],
-  (data: any, dashData: any, fetchingAddressStatus) => {
+  [txData, addressApi],
+  (data: any,  fetchingAddressStatus: any) => {
     let apiStatus = {
       addressApi: fetchingAddressStatus,
       currencyApi: data.status
     }
-    return apiStatus;
+    return apiStatus  ;
   }
 );
 
