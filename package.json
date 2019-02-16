@@ -8,8 +8,10 @@
   "scripts": {
     "dev": "webpack-dev-server --env.target development --config ./webpack-config/index.js",
     "build": "webpack --env.target production --config ./webpack-config/index.js",
-    "start": "pm2 start server.js",
-    "start:local": "node server.js"
+    "pm2:start": "pm2 start server.js",
+    "pm2:kill": "pm2 kill",
+    "start:local": "node server.js",
+    "start": "node start server.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
