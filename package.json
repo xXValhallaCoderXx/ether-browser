@@ -1,15 +1,17 @@
 {
-  "name": "webpack-v4",
+  "name": "ether-browser",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:xXValhallaCoderXx/Webpack-V3-React-HMR.git",
-  "author": "xXValhallaMonkXx <renate.gouveia@gmail.com>",
+  "main": "dist/index.js",
+  "repository": "git@github.com:xXValhallaCoderXx/ether-browser.git",
+  "author": "xXValhallaCoderXx <renate.gouveia@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --env.target development --config ./webpack-config/index.js",
+    "dev": "webpack-dev-server --env.target development --config ./webpack-config/index.js",
     "build": "webpack --env.target production --config ./webpack-config/index.js",
-    "serve": "pm2 start server.js",
-    "serve:local": "node server.js"
+    "pm2:start": "pm2 start server.js",
+    "pm2:kill": "pm2 kill",
+    "start:local": "node server.js",
+    "start": "node start server.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -34,6 +36,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
     "cssnano": "^4.1.7",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.9.4",
