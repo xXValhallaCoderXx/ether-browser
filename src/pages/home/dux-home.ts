@@ -34,7 +34,7 @@ export const fetchContractData = (contractID: string): ThunkType => {
     dispatch({ type: "@@HOME/CONTRACT_DATA_FETCHING", payload: "" });
     try {
       const result = await fetch(
-        `http://api.etherscan.io/api?module=account&action=txlist&address=${contractID}&startblock=0&endblock=99999999&sort=asc&apikey=85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS`
+        `https://api.etherscan.io/api?module=account&action=txlist&address=${contractID}&startblock=0&endblock=99999999&sort=asc&apikey=85RPZWEIAV7IAH4YRTGZPHG68TPP2X2GCS`
       );
       const data = await result.json();
       if (data.status === "0") {

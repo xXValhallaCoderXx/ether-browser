@@ -11,7 +11,8 @@
     "pm2:start": "pm2 start server.js",
     "pm2:kill": "pm2 kill",
     "start:local": "node server.js",
-    "start": "node start server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",

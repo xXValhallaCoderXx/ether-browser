@@ -1,17 +1,17 @@
 const express = require("express");
 const path = require("path");
 
-const publicPath = path.join(__dirname, "./dist");
+// const publicPath = path.join(__dirname, "dist");
 
 const app = express();
 
 
-app.use(express.static(publicPath));
+app.use("/", express.static("dist"));
 
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 })
-
-app.listen(3000, function () {
-  console.log('Crypto Gremlins Singing on: 3000')
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
+  console.log(`Crypto Gremlins Singing on: ${port}`)
 })

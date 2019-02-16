@@ -30,7 +30,7 @@ This is a Ethereum Public Smart Contract Transaction browser built on the follow
 - Enter your Public contract ID in the input provided, or you may also go via the `url` by typing `localhost:3000/address/:someID`
 
 ### Hosted
-- The hosted project can be found on: `http://128.199.247.201:3000`
+- The hosted project can be found on: `https://ether-browser.herokuapp.com`
 
 ### Known Bugs
 - All Tx are being pulled at once, didnt realize how many some over smart contract had, if knew this earlier would have implemented an incremental pagination to get data from the API on demand, rather than all at once
